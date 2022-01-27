@@ -1,0 +1,109 @@
+﻿@model List<Slider>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container">
+    <div class="d-flex" style="justify-content:flex-end">
+        <a asp-controller="slider" asp-action="create" class="btn btn-primary btn-icon-text mt-3">
+            <i class="mdi mdi-upload btn-icon-prepend"></i>
+            Create
+        </a>
+    </div>
+
+    <table class="table table-dark mt-3">
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Slider Image
+                </th>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Link
+                </th>
+                <th>
+                    Settings
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Slider slider in Model)
+            {
+            <tr>
+                <td>
+                    @slider.Id
+                </td>
+                <td>
+                    <img style="width:150px;height:60px;object-fit:contain;border-radius:0px" src="~/assets/img/slider/@slider.Image" alt="slider image" />
+                </td>
+                @if (slider.Title.Length > 20)
+                {
+                    <td>
+                        @slider.Title.Substring(0, 20)...
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @slider.Title
+                    </td>
+                }
+
+                @if (slider.Desc.Length > 20)
+                {
+                    <td>
+                        @slider.Desc.Substring(0, 20)...
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @slider.Desc
+                    </td>
+
+                }
+                <td>
+                    @slider.Link
+                </td>
+                <td>
+                    <a asp-controller="slider" asp-action="edit" asp-route-id="@slider.Id" class="btn btn-primary btn-icon-text mt-3">
+                        <i class="mdi mdi-file-check btn-icon-append"></i>
+                        Edit
+                    </a>
+                    <a asp-controller="slider" asp-action="delete" asp-route-id="@slider.Id" class="btn btn-primary btn-icon-text mt-3 delete-item">
+                        <i class="mdi mdi-alert btn-icon-prepend"></i>
+                        Delete
+                    </a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    @*pagination basdan yazmaq*@
+    @*<div class="row justify-content-center mt-3">
+            <nav aria-label="...">
+                <ul class="pagination" style="justify-content:center">
+                    <li class="page-item disabled">
+                        <a class="page-link">Previous</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item active" aria-current="page">
+                        <a class="page-link" href="#">2</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>*@
+
+</div>
