@@ -16,7 +16,7 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
         private readonly AppDbContext _context;
         private readonly IWebHostEnvironment _env;
 
-        public SliderController(AppDbContext context,IWebHostEnvironment env)
+        public SliderController(AppDbContext context, IWebHostEnvironment env)
         {
             _context = context;
             _env = env;
@@ -57,7 +57,7 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
-        
+
 
         public IActionResult Edit(int id)
         {
@@ -65,7 +65,7 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
             if (slider == null) return NotFound();
             return View(slider);
         }
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(Slider slider)
@@ -96,6 +96,16 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
             _context.SaveChanges();
 
             return RedirectToAction(nameof(Index));
+        }
+        public IActionResult Delete(int id)
+        {
+            Slider slider = _context.Sliders.FirstOrDefault(s => s.Id == id);
+            if (slider == null)
+                return Json(new { status = 404 });  
+                _context.Sliders.Remove(slider);
+            _context.SaveChanges();
+
+            return Json(new { status=200});
         }
     }
 }
