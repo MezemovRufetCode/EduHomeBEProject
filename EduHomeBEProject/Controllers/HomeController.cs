@@ -22,8 +22,9 @@ namespace EduHomeBEProject.Controllers
         {
             HomeVM homeVM = new HomeVM()
             {
-                Sliders = _context.Sliders.ToList()
-        };
+                Sliders = _context.Sliders.ToList(),
+                Settings = _context.Settings.FirstOrDefault()
+            };
             return View(homeVM);
         }
 

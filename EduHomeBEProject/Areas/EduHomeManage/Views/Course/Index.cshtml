@@ -1,11 +1,11 @@
-﻿@model List<Slider>
+﻿@model List<Course>
 @{
     ViewData["Title"] = "Index";
 }
 
 <div class="container">
     <div class="d-flex" style="justify-content:flex-end">
-        <a asp-controller="slider" asp-action="create" class="btn btn-primary btn-icon-text mt-3">
+        <a asp-controller="course" asp-action="create" class="btn btn-primary btn-icon-text mt-3">
             <i class="mdi mdi-upload btn-icon-prepend"></i>
             Create
         </a>
@@ -18,16 +18,16 @@
                     Id
                 </th>
                 <th>
-                    Slider Image
+                    Course Image
                 </th>
                 <th>
-                    Title
+                    Course Name
                 </th>
                 <th>
                     Description
                 </th>
                 <th>
-                    Link
+                    Category
                 </th>
                 <th>
                     Settings
@@ -35,50 +35,43 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (Slider slider in Model)
+            @foreach (Course course in Model)
             {
                 <tr>
                     <td>
-                        @slider.Id
+                        @course.Id
                     </td>
                     <td>
-                        <img style="width:150px;height:60px;object-fit:contain;border-radius:0px" src="~/assets/img/slider/@slider.Image" alt="slider image" />
+                        <img style="width:150px;height:60px;object-fit:contain;border-radius:0px" src="~/assets/img/course/@course.Image" alt="course image" />
                     </td>
-                    @if (slider.Title.Length > 20)
+
+                    <td>
+                        @course.Name
+                    </td>
+
+
+                    @if (course.Description.Length > 20)
                     {
                         <td>
-                            @slider.Title.Substring(0, 20)...
+                            @course.Description.Substring(0, 20)...
                         </td>
                     }
                     else
                     {
                         <td>
-                            @slider.Title
-                        </td>
-                    }
-
-                    @if (slider.Desc.Length > 20)
-                    {
-                        <td>
-                            @slider.Desc.Substring(0, 20)...
-                        </td>
-                    }
-                    else
-                    {
-                        <td>
-                            @slider.Desc
+                            @course.Description
                         </td>
 
                     }
                     <td>
-                        @slider.Link
+                        @course.Name
                     </td>
                     <td>
-                        <a asp-controller="slider" asp-action="edit" asp-route-id="@slider.Id" class="btn btn-primary btn-icon-text mt-3">
+                        <a asp-controller="course" asp-action="edit" asp-route-id="@course.Id" class="btn btn-primary btn-icon-text mt-3">
                             <i class="mdi mdi-file-check btn-icon-append"></i>
                             Edit
                         </a>
-                        <a asp-controller="slider" asp-action="delete" asp-route-id="@slider.Id" class="btn btn-primary btn-icon-text mt-3 delete-item">
+                        <a asp-controller="course" asp-action="delete" asp-route-id="@course.Id" class="btn btn-primary btn-icon-text mt-3 delete-item">
                             <i class="mdi mdi-alert btn-icon-prepend"></i>
                             Delete
                         </a>
@@ -139,7 +132,7 @@
                                 )
                             }
                         })
-                       
+
                     }
                 })
 
@@ -147,6 +140,6 @@
 
             })
         })
-        
+
     </script>
 }

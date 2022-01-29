@@ -9,5 +9,7 @@ namespace EduHomeBEProject.ViewModels
     public class HomeVM
     {
         public List<Slider> Sliders { get; set; }
+        public List<Tag> Tags { get; set; }
+        public Setting Settings { get; set; }
     }
 }
