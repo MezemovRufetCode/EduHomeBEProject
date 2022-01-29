@@ -19,6 +19,7 @@ namespace EduHomeBEProject.DAL
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<CourseTag> CourseTags { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
     }
 }

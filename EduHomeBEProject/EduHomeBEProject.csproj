@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20220129185201_CategoryTableCreated.cs" />
+    <Compile Remove="Migrations\20220129185201_CategoryTableCreated.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Areas\EduHomeManage\Data\" />
     <Folder Include="Areas\EduHomeManage\Models\" />
   </ItemGroup>

@@ -32,6 +32,7 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
             ViewBag.Tags = _context.Tags.ToList();
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(Course course)
@@ -50,11 +51,13 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
                 course.CourseTags.Add(cTag);
             }
 
-            //if (course.ImageFile == null)
-            //{
-            //    ModelState.AddModelError("ImageFile", "You can input only image");
-            //    return View();
-            //}
+
+
+            if (course.ImageFile == null)
+            {
+                ModelState.AddModelError("ImageFile", "You can input only image");
+                return View();
+            }
             if (!course.ImageFile.CheckSize(2))
             {
                 ModelState.AddModelError("ImageFile", "Image size max can be 2 mb");
