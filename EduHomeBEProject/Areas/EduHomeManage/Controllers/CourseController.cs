@@ -151,6 +151,15 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
             return RedirectToAction(nameof(Index));
 
         }
+        public IActionResult Delete(int id)
+        {
+            Course course = _context.Courses.FirstOrDefault(c => c.Id == id);
+            if (course == null)
+                return Json(new { status = 404 });
+            _context.Courses.Remove(course);
+            _context.SaveChanges();
+            return Json(new { status = 200 });
+        }
 
         public IActionResult Features()
         {
