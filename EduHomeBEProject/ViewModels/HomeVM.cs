@@ -10,6 +10,9 @@ namespace EduHomeBEProject.ViewModels
     {
         public List<Slider> Sliders { get; set; }
         public List<Tag> Tags { get; set; }
+        public List<Category> Categories { get; set; }
+        public List<Course> Courses { get; set; }
+        public List<Event> Events { get; set; }
         public Setting Settings { get; set; }
     }
 }

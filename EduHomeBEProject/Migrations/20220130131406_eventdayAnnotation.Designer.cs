@@ -4,14 +4,16 @@ using EduHomeBEProject.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EduHomeBEProject.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220130131406_eventdayAnnotation")]
+    partial class eventdayAnnotation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -168,6 +170,24 @@ namespace EduHomeBEProject.Migrations
                     b.ToTable("CourseTags");
                 });
 
+            modelBuilder.Entity("EduHomeBEProject.Models.ECategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("EventId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ECategories");
+                });
+
             modelBuilder.Entity("EduHomeBEProject.Models.EComment", b =>
                 {
                     b.Property<int>("Id")
@@ -215,8 +235,14 @@ namespace EduHomeBEProject.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Category")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ECategoryId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("EndTime")
                         .HasColumnType("datetime2");
@@ -239,6 +265,8 @@ namespace EduHomeBEProject.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ECategoryId");
 
                     b.ToTable("Events");
                 });
@@ -461,6 +489,13 @@ namespace EduHomeBEProject.Migrations
                         .HasForeignKey("EventId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("EduHomeBEProject.Models.Event", b =>
+                {
+                    b.HasOne("EduHomeBEProject.Models.ECategory", null)
+                        .WithMany("Events")
+                        .HasForeignKey("ECategoryId");
                 });
 
             modelBuilder.Entity("EduHomeBEProject.Models.EventSpeaker", b =>

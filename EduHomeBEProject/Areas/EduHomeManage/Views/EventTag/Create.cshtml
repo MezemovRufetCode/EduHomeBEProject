@@ -1,14 +1,14 @@
-﻿@model Tag
+﻿@model ETag
 @{
     ViewData["Title"] = "Create";
 }
 
 <div class="container">
-    <h2 class="mt-3">Create Tag</h2>
+    <h2 class="mt-3">Create Event Tag</h2>
     <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
     <form class="mt-3" method="post">
         <div class="mb-3">
-            <label asp-for="@Model.Name" class="form-label">Tag Name</label>
+            <label asp-for="@Model.Name" class="form-label">Event Tag Name</label>
             <input asp-for="@Model.Name" class="form-control">
             <span class="text text-danger" asp-validation-for="@Model.Name"></span>
         </div>

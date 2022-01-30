@@ -57,7 +57,7 @@
                 <div class="row">
                     <div class="col-md-3 col-sm-3 col-xs-6">
                         <div class="logo">
-                            <a asp-controller="home" asp-action="index"><img src="img/logo/@layoutService.getSettingDatas().Logo" alt="eduhome" /></a>
+                            <a asp-controller="home" asp-action="index"><img src="~/assets/img/logo/@layoutService.getSettingDatas().Logo" alt="eduhome" /></a>
                         </div>
                     </div>
                     <div class="col-md-9 col-sm-9 col-xs-6">
@@ -67,7 +67,7 @@
                                 <nav>
                                     <ul>
                                         <li>
-                                            <a href="index.html">Home</a>
+                                            <a asp-controller="home" asp-action="index">Home</a>
                                             <ul>
                                                 <li><a href="index.html">Home One</a></li>
                                                 <li><a href="index-2.html">Home Two</a></li>
@@ -78,16 +78,16 @@
                                         </li>
                                         <li><a href="about.html">About</a></li>
                                         <li>
-                                            <a href="course.html">courses</a>
+                                            <a asp-controller="course" asp-action="index">courses</a>
                                             <ul>
-                                                <li><a href="course.html">courses</a></li>
-                                                <li><a href="course-details.html">courses details</a></li>
+                                                <li><a asp-controller="course" asp-action="index">courses</a></li>
+                                                <li><a asp-controller="course" asp-action="index">courses details</a></li>
                                             </ul>
                                         </li>
                                         <li>
-                                            <a href="event.html">event</a>
+                                            <a asp-controller="event" asp-action="index">event</a>
                                             <ul>
-                                                <li><a href="event.html">event</a></li>
+                                                <li><a asp-controller="event" asp-action="index">event</a></li>
                                                 <li><a href="event-left-side-bar.html">event left sidebar</a></li>
                                                 <li><a href="event-right-side-bar.html">event right sidebar</a></li>
                                                 <li><a href="event-details.html">event details</a></li>
@@ -154,7 +154,7 @@
                     <div class="col-md-4 col-sm-6 col-xs-12">
                         <div class="single-widget pr-60">
                             <div class="footer-logo pb-25">
-                                <a href="index.html"><img src="img/logo/@layoutService.getSettingDatas().FooterLogo" alt="eduhome"></a>
+                                <a href="index.html"><img src="~/assets/img/logo/@layoutService.getSettingDatas().FooterLogo" alt="eduhome"></a>
                             </div>
                             <p>I must explain to you how all this mistaken idea of denoung pleure and praising pain was born and give you a coete account of the system. </p>
                             <div class="footer-social">
@@ -222,6 +222,7 @@
     <script src="~/assets/js/owl.carousel.min.js"></script>
     <script src="~/assets/js/jquery.mb.YTPlayer.js"></script>
     <script src="~/assets/js/jquery.nicescroll.min.js"></script>
+    @RenderSection("Scripts", false);
     <script src="~/assets/js/plugins.js"></script>
     <script src="~/assets/js/main.js"></script>
 </body>

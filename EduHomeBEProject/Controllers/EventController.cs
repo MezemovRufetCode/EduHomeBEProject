@@ -1,7 +1,7 @@
 ﻿using EduHomeBEProject.DAL;
 using EduHomeBEProject.Models;
+using EduHomeBEProject.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace EduHomeBEProject.Controllers
 {
-    public class CourseController : Controller
+    public class EventController : Controller
     {
         private readonly AppDbContext _context;
-        public CourseController(AppDbContext context)
+        public EventController(AppDbContext context)
         {
             _context = context;
         }
@@ -20,17 +20,17 @@ namespace EduHomeBEProject.Controllers
         {
             ViewBag.CurrentPage = page;
             ViewBag.TotalPage = Math.Ceiling((decimal)_context.Courses.Count() / 3);
-            List<Course> model = _context.Courses.Include(c => c.CourseTags).ThenInclude(ct => ct.Tag).Skip((page - 1) * 3).Take(3).ToList();
+            List<Event> model = _context.Events.Skip((page - 1) * 3).Take(3).ToList();
             return View(model);
         }
         public IActionResult Details(int id)
         {
-            Course course = _context.Courses.Include(c => c.CourseTags).ThenInclude(ct => ct.Tag).FirstOrDefault(c => c.Id == id);
-            if (course == null)
+            Event eventt = _context.Events.FirstOrDefault(c => c.Id == id);
+            if (eventt == null)
             {
                 return NotFound();
             }
-            return View(course);
+            return View(eventt);
             //return Content(id.ToString());
         }
     }

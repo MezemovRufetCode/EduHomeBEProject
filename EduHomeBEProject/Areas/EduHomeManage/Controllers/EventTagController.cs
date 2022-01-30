@@ -10,17 +10,16 @@ using System.Threading.Tasks;
 namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
 {
     [Area("EduHomeManage")]
-    public class TagController : Controller
+    public class EventTagController : Controller
     {
         private readonly AppDbContext _context;
-
-        public TagController(AppDbContext context)
+        public EventTagController(AppDbContext context)
         {
             _context = context;
         }
         public IActionResult Index()
         {
-            List<Tag> model = _context.Tags.Include(t => t.CourseTags).ToList();
+            List<ETag> model = _context.ETags.Include(t => t.EventTags).ToList();
             return View(model);
         }
         public IActionResult Create()
@@ -29,56 +28,56 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Tag tag)
+        public IActionResult Create(ETag etag)
         {
-            if (!ModelState.IsValid)  return View(); 
-            Tag sname = _context.Tags.FirstOrDefault(t => t.Name.ToLower() == tag.Name.ToLower());
+            if (!ModelState.IsValid) { return View(); }
+            ETag sname = _context.ETags.FirstOrDefault(t => t.Name.ToLower() == etag.Name.ToLower());
             if (sname != null)
             {
                 ModelState.AddModelError("", "This name existed,try different");
                 return View();
             }
-            _context.Tags.Add(tag);
+
+            _context.ETags.Add(etag);
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Edit(int id)
         {
-            Tag tag = _context.Tags.FirstOrDefault(t => t.Id == id);
-            return View(tag);
+            ETag etag = _context.ETags.FirstOrDefault(t => t.Id == id);
+            return View(etag);
         }
 
         [HttpPost]
 
         //Eyni adli iki tag yaratmaq olur editden sonra,onu duzeltmek
-        public IActionResult Edit(Tag tag)
+        public IActionResult Edit(ETag etag)
         {
-            
+
             if (!ModelState.IsValid) return View();
 
-            Tag exTag = _context.Tags.FirstOrDefault(t => t.Id == tag.Id);
+            ETag exTag = _context.ETags.FirstOrDefault(t => t.Id == etag.Id);
             if (exTag == null)
             {
                 return NotFound();
             }
-            Tag samename = _context.Tags.FirstOrDefault(t => t.Name.ToLower().Trim() == tag.Name.ToLower().Trim());
+            ETag samename = _context.ETags.FirstOrDefault(t => t.Name.ToLower().Trim() == etag.Name.ToLower().Trim());
             if (samename != null)
             {
                 ModelState.AddModelError("", "This name existed,try different one");
                 return View();
             }
-            exTag.Name = tag.Name;
+            exTag.Name = etag.Name;
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
-
         public IActionResult Delete(int id)
         {
-            Tag tag = _context.Tags.FirstOrDefault(t => t.Id == id);
-            if (tag == null)
+            ETag etag = _context.ETags.FirstOrDefault(t => t.Id == id);
+            if (etag == null)
                 return Json(new { status = 404 });
-            _context.Tags.Remove(tag);
+            _context.ETags.Remove(etag);
             _context.SaveChanges();
             return Json(new { status = 200 });
         }

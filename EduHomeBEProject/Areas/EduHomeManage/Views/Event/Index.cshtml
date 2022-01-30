@@ -1,11 +1,11 @@
-﻿@model List<Course>
+﻿@model List<Event>
 @{
     ViewData["Title"] = "Index";
 }
 
 <div class="container">
     <div class="d-flex" style="justify-content:flex-end">
-        <a asp-controller="course" asp-action="create" class="btn btn-primary btn-icon-text mt-3">
+        <a asp-controller="event" asp-action="create" class="btn btn-primary btn-icon-text mt-3">
             <i class="mdi mdi-upload btn-icon-prepend"></i>
             Create
         </a>
@@ -18,16 +18,16 @@
                     Id
                 </th>
                 <th>
-                    Course Image
+                    Event Image
                 </th>
                 <th>
-                    Course Name
+                    Event Name
                 </th>
                 <th>
                     Description
                 </th>
                 <th>
-                    Category
+                    Duration
                 </th>
                 <th>
                     Settings
@@ -35,49 +35,50 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (Course course in Model)
+            @*event sozu deyesen keyworddu ona gore events yazmisam*@
+            @foreach (Event item in Model)
             {
                 <tr>
                     <td>
-                        @course.Id
+                        @item.Id
                     </td>
                     <td>
-                        <img style="width:100px;height:60px;object-fit:contain;border-radius:0px" src="~/assets/img/course/@course.Image" alt="course image" />
+                        <img style="width:90px;height:60px;object-fit:contain;border-radius:0px" src="~/assets/img/event/@item.Image" alt="event image" />
                     </td>
 
                     <td>
-                        @course.Name
+                        @item.Name
                     </td>
 
 
-                    @if (course.Description.Length > 20)
+                    @if (item.Description.Length > 20)
                     {
                         <td>
-                            @course.Description.Substring(0, 20)...
+                            @item.Description.Substring(0, 20)...
                         </td>
                     }
                     else
                     {
                         <td>
-                            @course.Description
+                            @item.Description
                         </td>
 
                     }
                     <td>
-                        @course.Category
+                        @item.StartTime.ToString("HH:mm tt")-@item.EndTime.ToString("HH:mm tt")
                     </td>
                     <td>
-                        <a asp-controller="course" asp-action="edit" asp-route-id="@course.Id" class="btn btn-primary btn-icon-text mt-3">
+                        <a asp-controller="event" asp-action="edit" asp-route-id="@item.Id" class="btn btn-primary btn-icon-text mt-3">
                             <i class="mdi mdi-file-check btn-icon-append"></i>
                             Edit
                         </a>
-                        <a asp-controller="course" asp-action="delete" asp-route-id="@course.Id" class="btn btn-primary btn-icon-text mt-3 delete-item">
+                        <a asp-controller="event" asp-action="delete" asp-route-id="@item.Id" class="btn btn-primary btn-icon-text mt-3 delete-item">
                             <i class="mdi mdi-alert btn-icon-prepend"></i>
                             Delete
                         </a>
-                        <a asp-controller="course" asp-action="features" asp-route-id="@course.Id" class="btn btn-primary btn-icon-text mt-3">
+                        <a asp-controller="event" asp-action="features" asp-route-id="@item.Id" class="btn btn-primary btn-icon-text mt-3">
                             <i class="mdi mdi-alert btn-icon-prepend"></i>
-                            Features
+                            Other Features
                         </a>
                     </td>
                 </tr>
@@ -95,32 +96,32 @@
                     @if (ViewBag.CurrentPage == 1)
                     {
                         <li class="page-item disabled">
-                            <a class="page-link" asp-controller="course" asp-action="index" asp-route-page="@(ViewBag.CurrentPage-1)">Previous</a>
+                            <a class="page-link" asp-controller="event" asp-action="index" asp-route-page="@(ViewBag.CurrentPage-1)">Previous</a>
                         </li>
                     }
                     else
                     {
                         <li class="page-item">
-                            <a class="page-link" asp-controller="course" asp-action="index" asp-route-page="@(ViewBag.CurrentPage-1)">Previous</a>
+                            <a class="page-link" asp-controller="event" asp-action="index" asp-route-page="@(ViewBag.CurrentPage-1)">Previous</a>
                         </li>
                     }
 
                     @for (int i = 1; i <= ViewBag.TotalPage; i++)
                     {
                         <li class="page-item @(ViewBag.CurrentPage==i ? "active" : "")
-                                " style="@(ViewBag.CurrentPage==i ? "pointer-events:none" : "")"><a asp-controller="course" asp-action="index" asp-route-page="@i" class="page-link">@i</a></li>
+                                " style="@(ViewBag.CurrentPage==i ? "pointer-events:none" : "")"><a asp-controller="event" asp-action="index" asp-route-page="@i" class="page-link">@i</a></li>
                             }
 
                     @if (ViewBag.CurrentPage == ViewBag.TotalPage)
                     {
                         <li class="page-item disabled">
-                            <a class="page-link" asp-controller="course" asp-action="index" asp-route-page="@(ViewBag.CurrentPage+1)">Next</a>
+                            <a class="page-link" asp-controller="event" asp-action="index" asp-route-page="@(ViewBag.CurrentPage+1)">Next</a>
                         </li>
                     }
                     else
                     {
                         <li class="page-item">
-                            <a class="page-link" asp-controller="course" asp-action="index" asp-route-page="@(ViewBag.CurrentPage+1)">Next</a>
+                            <a class="page-link" asp-controller="event" asp-action="index" asp-route-page="@(ViewBag.CurrentPage+1)">Next</a>
                         </li>
                     }
                 </ul>

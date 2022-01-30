@@ -11,8 +11,6 @@ namespace EduHomeBEProject.Models
     public class Course
     {
         public int Id { get; set; }
-        [Required]
-        [StringLength(maximumLength:200)]
         public string Image { get; set; }
         //deyesen namei category adi ile eynidir
         [StringLength(maximumLength:50)]
@@ -31,6 +29,8 @@ namespace EduHomeBEProject.Models
         [Required]
         public string Certification { get; set; }
         public string Category { get; set; }
+        //[NotMapped]
+        //public List<int> CategoryIds { get; set; }
         [NotMapped]
         public IFormFile ImageFile { get; set; }
         public List<CourseTag> CourseTags { get; set; }

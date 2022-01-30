@@ -31,7 +31,6 @@
     </div>
 </section>
 <!-- Background Area End -->
-
 <!-- About Start -->
 <div class="about-area pb-155">
     <div class="container">
@@ -65,57 +64,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-4 col-sm-6 col-xs-12">
-                <div class="single-course">
-                    <div class="course-img">
-                        <a href="course-details.html">
-                            <img src="~/assets/img/course/course1.jpg" alt="course">
-                            <div class="course-hover">
-                                <i class="fa fa-link"></i>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="course-content">
-                        <h3><a href="course-details.html">CSE ENGINEERING</a></h3>
-                        <p>I must explain to you how all this a mistaken idea of denouncing great explorer of the rut the is lder of human happiness</p>
-                        <a class="default-btn" href="course-details.html">read more</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6 col-xs-12">
-                <div class="single-course">
-                    <div class="course-img">
-                        <a href="course-details.html">
-                            <img src="~/assets/img/course/course2.jpg" alt="course">
-                            <div class="course-hover">
-                                <i class="fa fa-link"></i>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="course-content">
-                        <h3><a href="course-details.html">political science</a></h3>
-                        <p>I must explain to you how all this a mistaken idea of denouncing great explorer of the rut the is lder of human happiness</p>
-                        <a class="default-btn" href="course-details.html">read more</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 hidden-sm col-xs-12">
-                <div class="single-course">
-                    <div class="course-img">
-                        <a href="course-details.html">
-                            <img src="~/assets/img/course/course3.jpg" alt="course">
-                            <div class="course-hover">
-                                <i class="fa fa-link"></i>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="course-content">
-                        <h3><a href="course-details.html">micro biology</a></h3>
-                        <p>I must explain to you how all this a mistaken idea of denouncing great explorer of the rut the is lder of human happiness</p>
-                        <a class="default-btn" href="course-details.html">read more</a>
-                    </div>
-                </div>
-            </div>
+            @await Html.PartialAsync("_CoursePartialView",Model.Courses)
         </div>
     </div>
 </div>
@@ -182,8 +131,27 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="row" style="flex-wrap:wrap;display:flex;">
+            @foreach (var eventt in Model.Events)
+            {
+                <div class="single-event mb-35  col-md-6 col-sm-12 col-xs-12">
+                    <div class="event-img">
+                        <a style="height:214px;width:197px" href="event-details.html"><img src="~/assets/img/event/@eventt.Image" alt="event"></a>
+                    </div>
+                    <div class="event-content text-left">
+                        <h3>@eventt.EventDay.ToString("dd MMMM yyyy")</h3>
+                        <h4><a href="event-details.html">@eventt.Name</a></h4>
+                        <ul>
+                            <li><i class="fa fa-clock-o"></i>@eventt.StartTime.ToString("HH:mm tt") - @eventt.EndTime.ToString("HH:mm tt")</li>
+                            <li><i class="fa fa-map-marker"></i>@eventt.Location</li>
+                        </ul>
+                        <div class="event-content-right">
+                            <a class="default-btn" href="event-details.html">join now</a>
+                        </div>
+                    </div>
+                </div>
+            }
+            @*<div class="col-md-6 col-sm-12 col-xs-12">
                 <div class="single-event mb-35">
                     <div class="event-img">
                         <a href="event-details.html"><img src="~/assets/img/event/event1.jpg" alt="event"></a>
@@ -250,7 +218,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>*@
         </div>
     </div>
 </div>

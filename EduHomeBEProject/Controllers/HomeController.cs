@@ -1,6 +1,7 @@
 ﻿using EduHomeBEProject.DAL;
 using EduHomeBEProject.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,11 @@ namespace EduHomeBEProject.Controllers
             HomeVM homeVM = new HomeVM()
             {
                 Sliders = _context.Sliders.ToList(),
-                Settings = _context.Settings.FirstOrDefault()
+                Settings = _context.Settings.FirstOrDefault(),
+                Categories=_context.Categories.ToList(),
+                //Courses = _context.Courses.Include(c => c.Category).Include(c => c.CourseTags).ThenInclude(ct => ct.Tag).ToList()
+                Courses =_context.Courses.Include(c=>c.CourseTags).ThenInclude(ct=>ct.Tag).ToList(),
+                Events=_context.Events.ToList()
             };
             return View(homeVM);
         }
