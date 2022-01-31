@@ -22,9 +22,10 @@ namespace EduHomeBEProject.DAL
         public DbSet<Category> Categories { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<EComment> EComments { get; set; }
-        public DbSet<ETag> ETags { get; set; }
-        public DbSet<EventTag> EventTags { get; set; }
         public DbSet<EventSpeaker> EventSpeakers { get; set; }
+        public DbSet<Blog> Blogs { get; set; }
+        public DbSet<Teacher> Teachers { get; set; }
+        public DbSet<TSocials> Socials { get; set; }
 
     }
 }

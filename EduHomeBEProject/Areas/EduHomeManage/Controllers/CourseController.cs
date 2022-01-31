@@ -55,31 +55,30 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
                 course.CourseTags.Add(cTag);
             }
 
-            //foreach (int id in course.Category.Id)
-            //{
-            //    Category cat = new Category
-            //    {
-            //        CourseId = id
-            //    };
-            //}
+
 
             if (course.ImageFile == null)
             {
                 ModelState.AddModelError("ImageFile", "You can input only image");
                 return View();
             }
-            if (!course.ImageFile.CheckSize(2))
+            if (course.ImageFile != null)
             {
-                ModelState.AddModelError("ImageFile", "Image size max can be 2 mb");
-                return View();
+                if (!course.ImageFile.CheckSize(2))
+                {
+                    ModelState.AddModelError("ImageFile", "Image size max can be 2 mb");
+                    return View();
+                }
+
+                if (!course.ImageFile.IsImage())
+                {
+                    ModelState.AddModelError("ImageFile", "Please choose image file");
+                    return View();
+                }
+                course.Image = course.ImageFile.SaveImg(_env.WebRootPath, "assets/img/course");
+
             }
 
-            if (!course.ImageFile.IsImage())
-            {
-                ModelState.AddModelError("ImageFile", "Please choose image file");
-                return View();
-            }
-            course.Image = course.ImageFile.SaveImg(_env.WebRootPath, "assets/img/course");
 
             _context.Courses.Add(course);
             _context.SaveChanges();
@@ -108,6 +107,7 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
             ViewBag.Categories = _context.Categories.ToList();
             Course exCourse = _context.Courses.Include(c => c.CourseTags).FirstOrDefault(c => c.Id == course.Id);
             if (!ModelState.IsValid) return View();
+            if (exCourse == null) return NotFound();
 
             if (course.ImageFile != null)
             {
@@ -126,11 +126,11 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
             }
 
 
-            List<CourseTag> removableTags = exCourse.CourseTags.Where(ct => !course.TagIds.Contains(ct.Id)).ToList();
-            exCourse.CourseTags.RemoveAll(ct => removableTags.Any(rt => ct.TagId == rt.Id));
+            List<CourseTag> removableTag = exCourse.CourseTags.Where(fc => !course.TagIds.Contains(fc.Id)).ToList();
+            exCourse.CourseTags.RemoveAll(fc => removableTag.Any(rc => fc.Id == rc.Id));
             foreach (var tagId in course.TagIds)
             {
-                CourseTag courseTag = exCourse.CourseTags.FirstOrDefault(ct => ct.TagId == tagId);
+                CourseTag courseTag = exCourse.CourseTags.FirstOrDefault(fc => fc.TagId == tagId);
                 if (courseTag == null)
                 {
                     CourseTag ctag = new CourseTag
@@ -141,15 +141,24 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
                     exCourse.CourseTags.Add(ctag);
                 }
             }
+
+            //bunu yazanda umimiyyetle kursu silir
+            //exCourse.Category = course.Category;
             exCourse.Name = course.Name;
             exCourse.Description = course.Description;
             exCourse.About = course.About;
             exCourse.Apply = course.Apply;
             exCourse.Certification = course.Certification;
+            exCourse.Starts = course.Starts;
+            exCourse.Duration = course.Duration;
+            exCourse.ClassDuration = course.ClassDuration;
+            exCourse.SkillLevel = course.SkillLevel;
+            exCourse.Language = course.Language;
+            exCourse.StudentCount = course.StudentCount;
+            exCourse.Price = course.Price;
 
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
-
         }
         public IActionResult Delete(int id)
         {
@@ -161,9 +170,12 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
             return Json(new { status = 200 });
         }
 
-        public IActionResult Features()
-        {
-            return View();
-        }
+        //public IActionResult Features(int CourseId)
+        //{
+        //    if (!_context.CourseFeatures.Any(f => f.CourseId != CourseId))
+        //        return RedirectToAction("Index", "Course");
+        //    List<CourseFeature> courseFeatures = _context.CourseFeatures.Where(f => f.CourseId == CourseId).ToList();
+        //    return View();
+        //}
     }
 }

@@ -28,15 +28,34 @@ namespace EduHomeBEProject.Models
         [StringLength(maximumLength: 700)]
         [Required]
         public string Certification { get; set; }
-        public string Category { get; set; }
-        //[NotMapped]
-        //public List<int> CategoryIds { get; set; }
+
+
+        [Required]
+        [DataType(DataType.Date)]
+        public DateTime Starts { get; set; }
+        [StringLength(maximumLength: 50)]
+        [Required]
+        public string Duration { get; set; }
+        [StringLength(maximumLength: 50)]
+        [Required]
+        public string ClassDuration { get; set; }
+        [StringLength(maximumLength: 50)]
+        [Required]
+        public string SkillLevel { get; set; }
+        [StringLength(maximumLength: 50)]
+        [Required]
+        public string Language { get; set; }
+        [Required]
+        public int StudentCount { get; set; }
+        [Required]
+        public decimal Price { get; set; }
+        public Category Category { get; set; }
+        public int CategoryId { get; set; }
         [NotMapped]
         public IFormFile ImageFile { get; set; }
         public List<CourseTag> CourseTags { get; set; }
         [NotMapped]
         public List<int> TagIds { get; set; }
         public List<Comment> Comments { get; set; }
-        public  List<CourseFeature> CourseFeatures { get; set; }
     }
 }

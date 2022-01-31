@@ -19,7 +19,7 @@ namespace EduHomeBEProject.Controllers
         public IActionResult Index(int page = 1)
         {
             ViewBag.CurrentPage = page;
-            ViewBag.TotalPage = Math.Ceiling((decimal)_context.Courses.Count() / 3);
+            ViewBag.TotalPage = Math.Ceiling((decimal)_context.Events.Count() / 3);
             List<Event> model = _context.Events.Skip((page - 1) * 3).Take(3).ToList();
             return View(model);
         }
