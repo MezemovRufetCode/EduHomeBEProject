@@ -2,7 +2,7 @@
 @foreach (var course in Model)
 {
     <div class="col-md-4 col-sm-6 col-xs-12" style="margin-top:20px !important">
-        <div class="single-course">
+        <div class="single-course" style="width:294px;height:435px">
             <div class="course-img">
                 <a asp-controller="course" asp-action="details" asp-route-id="@course.Id">
                     <img src="~/assets/img/course/@course.Image" alt="course">

@@ -41,16 +41,19 @@
                         <p>@Model.Description</p>
                         <div class="speakers-area fix">
                             <h4>speakers</h4>
-                            <div class="single-speaker">
-                                <div class="speaker-img">
-                                    <img src="~/assets/img/event/speaker1.jpg" alt="speaker">
+                            @foreach (var eventSpeaker in Model.EventSpeakers)
+                            {<div class="single-speaker">
+                                    <div class="speaker-img">
+                                        <img src="~/assets/img/event/@eventSpeaker.Speaker.Image" alt="speaker">
+                                    </div>
+                                    <div class="speaker-name">
+                                        <h5>@eventSpeaker.Speaker.Name</h5>
+                                        <p>@eventSpeaker.Speaker.Position</p>
+                                    </div>
                                 </div>
-                                <div class="speaker-name">
-                                    <h5>Anthony Smith</h5>
-                                    <p>CEO, Hastech </p>
-                                </div>
-                            </div>
-                            <div class="single-speaker">
+                            }
+
+                            @*<div class="single-speaker">
                                 <div class="speaker-img">
                                     <img src="~/assets/img/event/speaker2.jpg" alt="speaker">
                                 </div>
@@ -58,7 +61,7 @@
                                     <h5>Lucy Rose</h5>
                                     <p>Developer, STD </p>
                                 </div>
-                            </div>
+                            </div>*@
                         </div>
                     </div>
                     <div class="reply-area">

@@ -31,7 +31,6 @@ namespace EduHomeBEProject.Controllers
                 return NotFound();
             }
             return View(course);
-            //return Content(id.ToString());
         }
     }
 }

@@ -8,8 +8,9 @@ namespace EduHomeBEProject.Models
     public class EventSpeaker
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Image { get; set; }
-        public string Position { get; set; }
+        public int EventId { get; set; }
+        public int SpeakerId { get; set; }
+        public Event Event { get; set; }
+        public Speaker Speaker { get; set; }
     }
 }

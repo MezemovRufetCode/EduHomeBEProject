@@ -76,7 +76,6 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
                     return View();
                 }
                 course.Image = course.ImageFile.SaveImg(_env.WebRootPath, "assets/img/course");
-
             }
 
 
@@ -88,6 +87,8 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
 
         public IActionResult Edit(int id)
         {
+            if (!ModelState.IsValid)
+                return View();
             ViewBag.Tags = _context.Tags.ToList();
             ViewBag.Categories = _context.Categories.ToList();
             Course course = _context.Courses.Include(c => c.CourseTags).FirstOrDefault(c => c.Id == id);
@@ -106,7 +107,13 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
             ViewBag.Tags = _context.Tags.ToList();
             ViewBag.Categories = _context.Categories.ToList();
             Course exCourse = _context.Courses.Include(c => c.CourseTags).FirstOrDefault(c => c.Id == course.Id);
-            if (!ModelState.IsValid) return View();
+            Course checkName = _context.Courses.Include(e => e.CourseTags).ThenInclude(ct => ct.Tag).FirstOrDefault(c => c.Name == exCourse.Name);
+            if (checkName != null)
+            {
+                ModelState.AddModelError("Name", "Name is existed,try different one");
+                return View(exCourse);
+            }
+            if (!ModelState.IsValid) return View(exCourse);
             if (exCourse == null) return NotFound();
 
             if (course.ImageFile != null)
@@ -125,7 +132,6 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
                 exCourse.Image = course.ImageFile.SaveImg(_env.WebRootPath, "assets/img/course");
             }
 
-
             List<CourseTag> removableTag = exCourse.CourseTags.Where(fc => !course.TagIds.Contains(fc.Id)).ToList();
             exCourse.CourseTags.RemoveAll(fc => removableTag.Any(rc => fc.Id == rc.Id));
             foreach (var tagId in course.TagIds)
@@ -141,9 +147,7 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
                     exCourse.CourseTags.Add(ctag);
                 }
             }
-
-            //bunu yazanda umimiyyetle kursu silir
-            //exCourse.Category = course.Category;
+            exCourse.CategoryId = course.CategoryId;
             exCourse.Name = course.Name;
             exCourse.Description = course.Description;
             exCourse.About = course.About;

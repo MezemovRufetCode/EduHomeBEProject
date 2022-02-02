@@ -1,6 +1,7 @@
 ﻿using EduHomeBEProject.DAL;
 using EduHomeBEProject.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,9 +17,11 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
         {
             _context = context;
         }
-        public IActionResult Index()
+        public IActionResult Index(int page = 1)
         {
-            List<Category> model = _context.Categories.ToList();
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPage = Math.Ceiling((decimal)_context.Categories.Count() / 3);
+            List<Category> model = _context.Categories.Include(c => c.Courses).Skip((page - 1) * 3).Take(3).ToList();
             return View(model);
         }
 
@@ -47,6 +50,7 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
             return View(category);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Edit(Category category)
         {
             if (!ModelState.IsValid)
@@ -54,6 +58,12 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
                 return View();
             }
             Category exCategory = _context.Categories.FirstOrDefault(c => c.Id == category.Id);
+            Category checkName = _context.Categories.FirstOrDefault(c => c.Name == exCategory.Name);
+            if (checkName != null)
+            {
+                ModelState.AddModelError("Name", "Name is existed");
+                return View(exCategory);
+            }
             if (exCategory == null)
             {
                 return NotFound();

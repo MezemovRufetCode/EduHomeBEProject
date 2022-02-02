@@ -3,6 +3,7 @@ using EduHomeBEProject.Extensions;
 using EduHomeBEProject.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
         }
         public IActionResult Index(int page = 1)
         {
-            List<Teacher> model = _context.Teachers.Skip((page - 1) * 3).Take(3).ToList();
+            List<Teacher> model = _context.Teachers.Include(t=>t.TeacherFaculties).Include(t=>t.TeacherHobbies).Skip((page - 1) * 3).Take(3).ToList();
             if (!ModelState.IsValid) return View();
             ViewBag.CurrentPage = page;
             ViewBag.TotalPage = Math.Ceiling((decimal)_context.Teachers.Count() / 3);
@@ -30,8 +31,9 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
         }
         public IActionResult Create()
         {
-            //ViewBag.Tags = _context.Tags.ToList();
-            //ViewBag.Categories = _context.Categories.ToList();
+            ViewBag.Socials = _context.Socials.ToList();
+            ViewBag.Hobbies = _context.Hobbies.ToList();
+            ViewBag.Faculties = _context.Faculties.ToList();
             return View();
         }
 
@@ -39,10 +41,31 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Teacher teacher)
         {
+            ViewBag.Faculties = _context.Faculties.ToList();
+            ViewBag.Hobbies = _context.Hobbies.ToList();
             ViewBag.Socials = _context.Socials.ToList();
             if (!ModelState.IsValid) return View();
 
-    
+            teacher.TeacherHobbies = new List<TeacherHobby>();
+            foreach (int id in teacher.HobbyIds)
+            {
+                TeacherHobby tHobby = new TeacherHobby
+                {
+                    Teacher = teacher,
+                    HobbyId = id
+                };
+                teacher.TeacherHobbies.Add(tHobby);
+            }
+            teacher.TeacherFaculties = new List<TeacherFaculty>();
+            foreach (int id in teacher.FacultyIds)
+            {
+                TeacherFaculty tFaculty = new TeacherFaculty
+                {
+                    Teacher = teacher,
+                    FacultyId = id
+                };
+                teacher.TeacherFaculties.Add(tFaculty);
+            }
             if (teacher.ImageFile == null)
             {
                 ModelState.AddModelError("ImageFile", "You can input only image");
@@ -73,7 +96,10 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
         }
         public IActionResult Edit(int id)
         {
-            Teacher teacher = _context.Teachers.FirstOrDefault(t => t.Id == id);
+            ViewBag.Faculties = _context.Faculties.ToList();
+            ViewBag.Hobbies = _context.Hobbies.ToList();
+            ViewBag.Socials = _context.Socials.ToList();
+            Teacher teacher = _context.Teachers.Include(t=>t.TeacherFaculties).Include(t=>t.TeacherHobbies).FirstOrDefault(t => t.Id == id);
             if (teacher == null)
             {
                 return NotFound();
@@ -85,7 +111,10 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(Teacher teacher)
         {
-            Teacher exTeach = _context.Teachers.FirstOrDefault(t=> t.Id == teacher.Id);
+            ViewBag.Faculties = _context.Faculties.ToList();
+            ViewBag.Hobbies = _context.Hobbies.ToList();
+            ViewBag.Socials = _context.Socials.ToList();
+            Teacher exTeach = _context.Teachers.Include(t => t.TeacherFaculties).Include(t => t.TeacherHobbies).FirstOrDefault(t=> t.Id == teacher.Id);
             if (!ModelState.IsValid) return View(exTeach);
 
             if (teacher.ImageFile != null)
@@ -103,31 +132,51 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
                 Helpers.Helper.DeleteImg(_env.WebRootPath, "assets/img/teacher", exTeach.Image);
                 exTeach.Image = teacher.ImageFile.SaveImg(_env.WebRootPath, "assets/img/teacher");
             }
-            //if (teacher.Name == null)
-            //{
-            //    ModelState.AddModelError("Name", "Include teacher name");
-            //    return View(exTeach);
-            //}
-            //if (teacher.About == null)
-            //{
-            //    ModelState.AddModelError("About", "Include about teacher");
-            //    return View(exTeach);
-            //}
-            //if (teacher.Email == null)
-            //{
-            //    ModelState.AddModelError("Email", "Include email");
-            //    return View(exTeach);
-            //}
-            //if (teacher.Phone == null)
-            //{
-            //    ModelState.AddModelError("Phone", "Include phone number");
-            //    return View(exTeach);
-            //}
+
+            List<TeacherFaculty> removableFaculty = exTeach.TeacherFaculties.Where(tf => !teacher.FacultyIds.Contains(tf.Id)).ToList();
+            exTeach.TeacherFaculties.RemoveAll(fc => removableFaculty.Any(rf => fc.Id == rf.Id));
+            foreach (var facultyId in teacher.FacultyIds)
+            {
+                TeacherFaculty teacherFaculty = exTeach.TeacherFaculties.FirstOrDefault(fc => fc.FacultyId == facultyId);
+                if (teacherFaculty == null)
+                {
+                    TeacherFaculty tfak = new TeacherFaculty
+                    {
+                        FacultyId = facultyId,
+                        TeacherId = exTeach.Id
+                    };
+                    exTeach.TeacherFaculties.Add(tfak);
+                }
+            }
+            List<TeacherHobby> removableHobby = exTeach.TeacherHobbies.Where(th => !teacher.HobbyIds.Contains(th.Id)).ToList();
+            exTeach.TeacherHobbies.RemoveAll(fc => removableHobby.Any(rh => fc.Id == rh.Id));
+            foreach (var hobbyId in teacher.HobbyIds)
+            {
+                TeacherHobby teacherHobby = exTeach.TeacherHobbies.FirstOrDefault(fc => fc.HobbyId == hobbyId);
+                if (teacherHobby == null)
+                {
+                    TeacherHobby thob = new TeacherHobby
+                    {
+                        HobbyId = hobbyId,
+                        TeacherId = exTeach.Id
+                    };
+                    exTeach.TeacherHobbies.Add(thob);
+                }
+            }
+
+            exTeach.FacebookAccount = teacher.FacebookAccount;
+            exTeach.VimeoAccount = teacher.VimeoAccount;
+            exTeach.TwitterAccount = teacher.TwitterAccount;
+            exTeach.Pinterest = teacher.Pinterest;
+
+
             exTeach.Name = teacher.Name;
             exTeach.About = teacher.About;
             exTeach.Position = teacher.Position;
             exTeach.Email = teacher.Email;
             exTeach.Phone = teacher.Phone;
+            exTeach.Degree = teacher.Degree;
+            exTeach.Experience = teacher.Experience;
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
 

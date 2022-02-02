@@ -7,6 +7,14 @@
   <ItemGroup>
     <Compile Remove="Migrations\20220129185201_CategoryTableCreated.cs" />
     <Compile Remove="Migrations\20220129185201_CategoryTableCreated.Designer.cs" />
+    <Compile Remove="Migrations\20220202141209_IdentityTableCreated.cs" />
+    <Compile Remove="Migrations\20220202141209_IdentityTableCreated.Designer.cs" />
+    <Compile Remove="Migrations\20220202141255_IdentityChanges.cs" />
+    <Compile Remove="Migrations\20220202141255_IdentityChanges.Designer.cs" />
+    <Compile Remove="Migrations\20220202141338_IdentityFullnameAdded.cs" />
+    <Compile Remove="Migrations\20220202141338_IdentityFullnameAdded.Designer.cs" />
+    <Compile Remove="Migrations\20220202141501_ChangedNameIdentityUsernameToFullname.cs" />
+    <Compile Remove="Migrations\20220202141501_ChangedNameIdentityUsernameToFullname.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -15,12 +23,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.22" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.22" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.22" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.22">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.PowerBI.Api" Version="4.2.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
   </ItemGroup>
 

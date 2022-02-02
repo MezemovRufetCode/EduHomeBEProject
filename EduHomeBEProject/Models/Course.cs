@@ -14,40 +14,38 @@ namespace EduHomeBEProject.Models
         public string Image { get; set; }
         //deyesen namei category adi ile eynidir
         [StringLength(maximumLength:50)]
-        [Required]
+        [Required(ErrorMessage = "Please enter Name")]
         public string Name { get; set; }
         [StringLength(maximumLength:700)]
-        [Required]
+        [Required(ErrorMessage = "Please enter Description")]
         public string Description { get; set; }
         [StringLength(maximumLength: 700)]
-        [Required]
+        [Required(ErrorMessage = "About can not be empty")]
         public string About { get; set; }
         [StringLength(maximumLength: 700)]
-        [Required]
+        [Required(ErrorMessage = "Students need to know how to apply")]
         public string Apply { get; set; }
         [StringLength(maximumLength: 700)]
-        [Required]
+        [Required(ErrorMessage = "Certification can not be empty")]
         public string Certification { get; set; }
-
-
-        [Required]
+        [Required(ErrorMessage = "Start Time can not be empty")]
         [DataType(DataType.Date)]
         public DateTime Starts { get; set; }
         [StringLength(maximumLength: 50)]
-        [Required]
+        [Required(ErrorMessage = "Course duration can not be empty")]
         public string Duration { get; set; }
         [StringLength(maximumLength: 50)]
-        [Required]
+        [Required(ErrorMessage = "Class duration can not be empty")]
         public string ClassDuration { get; set; }
         [StringLength(maximumLength: 50)]
-        [Required]
+        [Required(ErrorMessage = "Skill level can not be empty")]
         public string SkillLevel { get; set; }
         [StringLength(maximumLength: 50)]
-        [Required]
+        [Required(ErrorMessage = "Language can not be empty")]
         public string Language { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Students count must be included")]
         public int StudentCount { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Course fee must be included")]
         public decimal Price { get; set; }
         public Category Category { get; set; }
         public int CategoryId { get; set; }

@@ -2,12 +2,12 @@
 @foreach (var eventt in Model)
 {
     <div class="col-md-4 col-sm-6 col-xs-12">
-        <div class="single-event mb-60">
+        <div class="single-event mb-60" style="height:480px;width:294px">
             <div class="event-img">
                 <a asp-controller="event" asp-action="details" asp-route-id="@eventt.Id">
-                    <img src="~/assets/img/event/@eventt.Image" alt="event">
+                    <img style="height:294px;width:270px;object-fit:cover" src="~/assets/img/event/@eventt.Image" alt="event">
                     <div class="course-hover">
-                        <i class="fa fa-link"></i>
+                        < class="fa fa-link"></>
                     </div>
                 </a>
                 <div class="event-date">

@@ -77,6 +77,12 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
         public IActionResult Edit(Blog blog)
         {
             Blog exBlog = _context.Blogs.FirstOrDefault(b => b.Id == blog.Id);
+            Blog checkName = _context.Blogs.FirstOrDefault(c => c.Title == exBlog.Title);
+            if (checkName != null)
+            {
+                ModelState.AddModelError("Name", "Name is existed,try differen");
+                return View(exBlog);
+            }
             if (!ModelState.IsValid) return View();
 
             if (blog.ImageFile != null)

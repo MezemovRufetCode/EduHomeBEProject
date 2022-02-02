@@ -26,12 +26,12 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
         {
             ViewBag.CurrentPage = page;
             ViewBag.TotalPage = Math.Ceiling((decimal)_context.Events.Count() / 3);
-            List<Event> model = _context.Events.Skip((page - 1) * 3).Take(3).ToList();
+            List<Event> model = _context.Events.Include(e => e.EventSpeakers).Skip((page - 1) * 3).Take(3).ToList();
             return View(model);
         }
         public IActionResult Create()
         {
-            //ViewBag.ETags = _context.ETags.ToList();
+            ViewBag.Speakers = _context.Speakers.ToList();
             return View();
         }
 
@@ -39,7 +39,20 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Event eventt)
         {
+            ViewBag.Speakers = _context.Speakers.ToList();
             if (!ModelState.IsValid) return View();
+
+            eventt.EventSpeakers = new List<EventSpeaker>();
+            foreach (int id in eventt.SpeakerIds)
+            {
+                EventSpeaker eSpeaker = new EventSpeaker
+                {
+                    Event = eventt,
+                    SpeakerId = id
+                };
+                eventt.EventSpeakers.Add(eSpeaker);
+            }
+
             if (eventt.ImageFile == null)
             {
                 ModelState.AddModelError("ImageFile", "You can input only image");
@@ -66,8 +79,8 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
 
         public IActionResult Edit(int id)
         {
-         
-            Event eventt = _context.Events.FirstOrDefault(e => e.Id == id);
+            ViewBag.Speakers = _context.Speakers.ToList();
+            Event eventt = _context.Events.Include(e=>e.EventSpeakers).ThenInclude(es=>es.Speaker).FirstOrDefault(e => e.Id == id);
             if (eventt == null)
             {
                 return NotFound();
@@ -80,7 +93,14 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(Event eventt)
         {
-            Event exEvent = _context.Events.FirstOrDefault(e => e.Id == eventt.Id);
+            ViewBag.Speakers = _context.Speakers.ToList();
+            Event exEvent = _context.Events.Include(e=>e.EventSpeakers).ThenInclude(es=>es.Speaker).FirstOrDefault(e => e.Id == eventt.Id);
+            Event checkName = _context.Events.Include(e => e.EventSpeakers).ThenInclude(es => es.Speaker).FirstOrDefault(e => e.Name == exEvent.Name);
+            if (checkName != null)
+            {
+                ModelState.AddModelError("Name", "Name is existed,try different one");
+                return View(exEvent);
+            }
             if (!ModelState.IsValid) return View();
 
             if (eventt.ImageFile != null)
@@ -97,6 +117,22 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
                 }
                 Helpers.Helper.DeleteImg(_env.WebRootPath, "assets/img/event", exEvent.Image);
                 exEvent.Image = eventt.ImageFile.SaveImg(_env.WebRootPath, "assets/img/event");
+            }
+
+            List<EventSpeaker> removableSpeaker = exEvent.EventSpeakers.Where(fc => !eventt.SpeakerIds.Contains(fc.Id)).ToList();
+            exEvent.EventSpeakers.RemoveAll(fc => removableSpeaker.Any(rc => fc.Id == rc.Id));
+            foreach (var speakerId in eventt.SpeakerIds)
+            {
+                EventSpeaker eventSpeaker = exEvent.EventSpeakers.FirstOrDefault(fc => fc.SpeakerId == speakerId);
+                if (eventSpeaker == null)
+                {
+                    EventSpeaker espeaker = new EventSpeaker
+                    {
+                        SpeakerId = speakerId,
+                        EventId = exEvent.Id
+                    };
+                    exEvent.EventSpeakers.Add(espeaker);
+                }
             }
 
             exEvent.Name = eventt.Name;

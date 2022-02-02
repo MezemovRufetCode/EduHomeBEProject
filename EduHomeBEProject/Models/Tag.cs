@@ -9,7 +9,7 @@ namespace EduHomeBEProject.Models
     public class Tag
     {
         public int Id { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Tag name can not be empty")]
         [StringLength(maximumLength:20, ErrorMessage = "Max length can be 20")]
         public string Name { get; set; }
         public List<CourseTag> CourseTags { get; set; }

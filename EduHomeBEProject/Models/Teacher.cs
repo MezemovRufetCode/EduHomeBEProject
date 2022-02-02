@@ -29,8 +29,35 @@ namespace EduHomeBEProject.Models
         [Required]
         [StringLength(maximumLength: 50)]
         public string Phone { get; set; }
+
+        [Required]
+        [StringLength(maximumLength:100)]
+        public string Experience { get; set; }
+        [Required]
+        [StringLength(maximumLength:100)]
+        public string Degree { get; set; }
+
+
+        //sonra vaxt qalsa duzelt
+
+        [StringLength(maximumLength: 200)]
+        public string FacebookAccount { get; set; }
+        [StringLength(maximumLength: 200)]
+        public string VimeoAccount { get; set; }
+        [StringLength(maximumLength: 200)]
+        public string Pinterest { get; set; }
+        [StringLength(maximumLength: 200)]
+        public string TwitterAccount { get; set; }
+
+
         public List<TSocials> Socials { get; set; }
         [NotMapped]
         public IFormFile ImageFile { get; set; }
+        public List<TeacherFaculty> TeacherFaculties { get; set; }
+        [NotMapped]
+        public List<int> FacultyIds { get; set; }
+        public List<TeacherHobby> TeacherHobbies { get; set; }
+        [NotMapped]
+        public List<int> HobbyIds { get; set; }
     }
 }

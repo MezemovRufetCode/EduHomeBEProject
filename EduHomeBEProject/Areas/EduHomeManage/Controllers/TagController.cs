@@ -18,9 +18,11 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
         {
             _context = context;
         }
-        public IActionResult Index()
+        public IActionResult Index(int page=1)
         {
-            List<Tag> model = _context.Tags.Include(t => t.CourseTags).ToList();
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPage = Math.Ceiling((decimal)_context.Tags.Count() / 3);
+            List<Tag> model = _context.Tags.Include(t => t.CourseTags).Skip((page-1)*3).Take(3).ToList();
             return View(model);
         }
         public IActionResult Create()
@@ -50,14 +52,19 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
         }
 
         [HttpPost]
-
-        //Eyni adli iki tag yaratmaq olur editden sonra,onu duzeltmek
+        [ValidateAntiForgeryToken]
         public IActionResult Edit(Tag tag)
         {
             
             if (!ModelState.IsValid) return View();
 
             Tag exTag = _context.Tags.FirstOrDefault(t => t.Id == tag.Id);
+            Tag checkName = _context.Tags.FirstOrDefault(c => c.Name == exTag.Name);
+            if (checkName != null)
+            {
+                ModelState.AddModelError("Name", "Name is existed");
+                return View(exTag);
+            }
             if (exTag == null)
             {
                 return NotFound();

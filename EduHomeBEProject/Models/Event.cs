@@ -25,6 +25,8 @@ namespace EduHomeBEProject.Models
         public string Description { get; set; }
         public List<EventSpeaker> EventSpeakers { get; set; }
         [NotMapped]
+        public List<int> SpeakerIds { get; set; }
+        [NotMapped]
         public IFormFile ImageFile { get; set; }
 
         public List<EComment> EComments { get; set; }

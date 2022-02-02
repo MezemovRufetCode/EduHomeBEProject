@@ -1,0 +1,86 @@
+﻿@model UserEditVM
+@{
+    Layout = null;
+}
+<!doctype html>
+<html class="no-js" lang="en">
+
+<!-- Mirrored from demo.devitems.com/eduhome/signup.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 21 Jun 2020 19:44:02 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Edit</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/assets/css/animate.css">
+    <link rel="stylesheet" href="~/assets/css/meanmenu.css">
+    <link rel="stylesheet" href="~/assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="~/assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/assets/css/et-line-icon.css">
+    <link rel="stylesheet" href="~/assets/css/reset.css">
+    <link rel="stylesheet" href="~/assets/css/ionicons.min.css">
+    <link rel="stylesheet" href="~/assets/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="~/assets/css/style.css">
+    <link rel="stylesheet" href="~/assets/css/responsive.css">
+    <script src="~/assets/js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+<body>
+    <!-- Register start -->
+    <div class="register-area pt-80 pb-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 text-center">
+                    <div class="login">
+                        <div class="login-form-container">
+                            <div class="login-text">
+                                <h2>Edit Account</h2>
+                                <span>Please login using account detail bellow.</span>
+                            </div>
+                            <div class="login-form">
+                                <div class="alert alert-danger" asp-validation-summary="ModelOnly"></div>
+                                <form method="post">
+                                    <input style="margin-top:10px" asp-for="Username" placeholder="Username"><br />
+                                    <span class="text text-danger" asp-validation-for="Username"></span>
+                                    <input style="margin-top:10px" asp-for="Fullname" placeholder="Fullname"><br />
+                                    <span class="text text-danger" asp-validation-for="Fullname"></span>
+                                    <input style="margin-top:10px" asp-for="Email" placeholder="Email"><br />
+                                    <span class="text text-danger" asp-validation-for="Email"></span>
+                                    <input style="margin-top:10px" asp-for="CurrentPassword" placeholder="CurrentPassword"><br />
+                                    <span class="text text-danger" asp-validation-for="CurrentPassword"></span>
+                                    <input style="margin-top:10px" asp-for="Password" placeholder="New Password"><br />
+                                    <span class="text text-danger" asp-validation-for="Password"></span>
+                                    <input style="margin-top:10px" asp-for="ComfirmPassword" placeholder="Confirm new Password"><br />
+                                    <span class="text text-danger" asp-validation-for="ComfirmPassword"></span>
+                                    <div style="margin-top:10px" class="button-box">
+                                        <button type="submit" class="default-btn">Save changes</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Register end -->
+
+    <script src="js/vendor/jquery-1.12.0.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.meanmenu.js"></script>
+    <script src="js/jquery.magnific-popup.js"></script>
+    <script src="js/ajax-mail.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.mb.YTPlayer.js"></script>
+    <script src="js/jquery.nicescroll.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+<!-- Mirrored from demo.devitems.com/eduhome/signup.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 21 Jun 2020 19:44:02 GMT -->
+</html>
