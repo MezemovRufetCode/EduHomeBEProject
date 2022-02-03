@@ -108,11 +108,11 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
             ViewBag.Categories = _context.Categories.ToList();
             Course exCourse = _context.Courses.Include(c => c.CourseTags).FirstOrDefault(c => c.Id == course.Id);
             Course checkName = _context.Courses.Include(e => e.CourseTags).ThenInclude(ct => ct.Tag).FirstOrDefault(c => c.Name == exCourse.Name);
-            if (checkName != null)
-            {
-                ModelState.AddModelError("Name", "Name is existed,try different one");
-                return View(exCourse);
-            }
+            //if (checkName != null)
+            //{
+            //    ModelState.AddModelError("Name", "Name is existed,try different one");
+            //    return View(exCourse);
+            //}
             if (!ModelState.IsValid) return View(exCourse);
             if (exCourse == null) return NotFound();
 
@@ -120,12 +120,12 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
             {
                 if (!course.ImageFile.IsImage())
                 {
-                    ModelState.AddModelError("ImageFiles", "Please select image file only");
+                    ModelState.AddModelError("ImageFile", "Please select image file only");
                     return View(exCourse);
                 }
                 if (!course.ImageFile.CheckSize(2))
                 {
-                    ModelState.AddModelError("ImageFiles", "Image size max can be 2 mb");
+                    ModelState.AddModelError("ImageFile", "Image size max can be 2 mb");
                     return View(exCourse);
                 }
                 Helpers.Helper.DeleteImg(_env.WebRootPath, "assets/img/course", exCourse.Image);

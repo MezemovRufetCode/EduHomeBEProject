@@ -90,12 +90,12 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
             {
                 if (!blog.ImageFile.IsImage())
                 {
-                    ModelState.AddModelError("ImageFiles", "Please select image file only");
+                    ModelState.AddModelError("ImageFile", "Please select image file only");
                     return View(exBlog);
                 }
                 if (!blog.ImageFile.CheckSize(2))
                 {
-                    ModelState.AddModelError("ImageFiles", "Image size max can be 2 mb");
+                    ModelState.AddModelError("ImageFile", "Image size max can be 2 mb");
                     return View(exBlog);
                 }
                 Helpers.Helper.DeleteImg(_env.WebRootPath, "assets/img/blog", exBlog.Image);

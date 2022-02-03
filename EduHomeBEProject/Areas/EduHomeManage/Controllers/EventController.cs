@@ -98,23 +98,23 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
             ViewBag.Speakers = _context.Speakers.ToList();
             Event exEvent = _context.Events.Include(e=>e.EventSpeakers).ThenInclude(es=>es.Speaker).FirstOrDefault(e => e.Id == eventt.Id);
             Event checkName = _context.Events.Include(e => e.EventSpeakers).ThenInclude(es => es.Speaker).FirstOrDefault(e => e.Name == exEvent.Name);
-            if (checkName != null)
-            {
-                ModelState.AddModelError("Name", "Name is existed,try different one");
-                return View(exEvent);
-            }
+            //if (checkName != null)
+            //{
+            //    ModelState.AddModelError("Name", "Name is existed,try different one");
+            //    return View(exEvent);
+            //}
             if (!ModelState.IsValid) return View();
 
             if (eventt.ImageFile != null)
             {
                 if (!eventt.ImageFile.IsImage())
                 {
-                    ModelState.AddModelError("ImageFiles", "Please select image file only");
+                    ModelState.AddModelError("ImageFile", "Please select image file only");
                     return View(exEvent);
                 }
                 if (!eventt.ImageFile.CheckSize(2))
                 {
-                    ModelState.AddModelError("ImageFiles", "Image size max can be 2 mb");
+                    ModelState.AddModelError("ImageFile", "Image size max can be 2 mb");
                     return View(exEvent);
                 }
                 Helpers.Helper.DeleteImg(_env.WebRootPath, "assets/img/event", exEvent.Image);

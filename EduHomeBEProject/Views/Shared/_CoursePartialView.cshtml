@@ -12,7 +12,7 @@
                 </a>
             </div>
             <div class="course-content">
-                <h3><a asp-controller="course" asp-action="details" asp-route-id="@course.Id">@course.Name</a></h3>
+                <h3><a asp-controller="course" asp-action="details" asp-route-id="@course.Id" asp-route-categoryId="@course.CategoryId">@course.Name</a></h3>
                 @if (course.Description.Length > 120)
                 {
                     <p>@course.Description.Substring(0, 120)</p>

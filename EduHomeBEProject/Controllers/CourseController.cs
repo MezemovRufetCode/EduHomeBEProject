@@ -23,20 +23,25 @@ namespace EduHomeBEProject.Controllers
         }
         public IActionResult Index(int page = 1)
         {
+            ViewBag.Categories = _context.Categories.ToList();
             ViewBag.CurrentPage = page;
             ViewBag.TotalPage = Math.Ceiling((decimal)_context.Courses.Count() / 3);
             List<Course> model = _context.Courses.Include(c => c.CourseTags).ThenInclude(ct => ct.Tag).Skip((page - 1) * 3).Take(3).ToList();
             return View(model);
         }
+
         public IActionResult Details(int id)
         {
-            Course course = _context.Courses.Include(c => c.CourseTags).ThenInclude(ct => ct.Tag).Include(c=>c.Comments).ThenInclude(c=>c.AppUser).FirstOrDefault(c => c.Id == id);
+            ViewBag.Categories = _context.Categories.Include(c=>c.Courses).ToList();
+            Course course = _context.Courses.Include(c => c.CourseTags).ThenInclude(ct => ct.Tag).Include(c=>c.Comments).ThenInclude(c=>c.AppUser).Include(c=>c.Category).ThenInclude(c=>c.Courses).FirstOrDefault(c => c.Id == id);
             if (course == null)
             {
                 return NotFound();
             }
+            //ViewBag.RelatedCourse = _context.Categories.FirstOrDefault(c => c.Id == categoryId);
             return View(course);
         }
+
         [Authorize]
         [AutoValidateAntiforgeryToken]
         [HttpPost]
