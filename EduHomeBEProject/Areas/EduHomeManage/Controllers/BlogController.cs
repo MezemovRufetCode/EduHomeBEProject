@@ -3,6 +3,7 @@ using EduHomeBEProject.Extensions;
 using EduHomeBEProject.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
         {
             ViewBag.CurrentPage = page;
             ViewBag.TotalPage = Math.Ceiling((decimal)_context.Blogs.Count() / 3);
-            List<Blog> model = _context.Blogs.Skip((page - 1) * 3).Take(3).ToList();
+            List<Blog> model = _context.Blogs.Include(b=>b.Comments).Skip((page - 1) * 3).Take(3).ToList();
             return View(model);
         }
         public IActionResult Create()
@@ -108,7 +109,14 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
 
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
+        }
 
+        public IActionResult Comments(int BlogId)
+        {
+            if (!_context.bComments.Any(c => c.BlogId == BlogId))
+                return RedirectToAction("Index", "Blog");
+            List<bComment> comments = _context.bComments.Include(c => c.AppUser).Where(b => b.BlogId == BlogId).ToList();
+            return View(comments);
         }
         public IActionResult Delete(int id)
         {

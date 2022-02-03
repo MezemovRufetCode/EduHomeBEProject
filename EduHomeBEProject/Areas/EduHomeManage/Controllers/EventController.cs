@@ -26,7 +26,7 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
         {
             ViewBag.CurrentPage = page;
             ViewBag.TotalPage = Math.Ceiling((decimal)_context.Events.Count() / 3);
-            List<Event> model = _context.Events.Include(e => e.EventSpeakers).Skip((page - 1) * 3).Take(3).ToList();
+            List<Event> model = _context.Events.Include(e => e.EventSpeakers).Include(e=>e.EComments).Skip((page - 1) * 3).Take(3).ToList();
             return View(model);
         }
         public IActionResult Create()
@@ -79,6 +79,8 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
 
         public IActionResult Edit(int id)
         {
+            if (!ModelState.IsValid)
+                return View();
             ViewBag.Speakers = _context.Speakers.ToList();
             Event eventt = _context.Events.Include(e=>e.EventSpeakers).ThenInclude(es=>es.Speaker).FirstOrDefault(e => e.Id == id);
             if (eventt == null)
@@ -145,6 +147,18 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
             return RedirectToAction(nameof(Index));
 
         }
+
+
+        public IActionResult Comments(int EventId)
+        {
+            if (!_context.EComments.Any(e => e.EventId == EventId))
+                return RedirectToAction("Index", "Event");
+            List<EComment> ecomments = _context.EComments.Include(c => c.AppUser).Where(e => e.EventId == EventId).ToList();
+            return View(ecomments);
+        }
+
+
+
         public IActionResult Delete(int id)
         {
             Event eventt = _context.Events.FirstOrDefault(e => e.Id == id);

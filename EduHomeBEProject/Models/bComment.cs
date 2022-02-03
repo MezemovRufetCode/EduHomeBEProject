@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EduHomeBEProject.Models
 {
-    public class Comment
+    public class bComment
     {
         public int Id { get; set; }
         [Required]
@@ -15,8 +15,8 @@ namespace EduHomeBEProject.Models
         public string Subject { get; set; }
         public DateTime WriteTime { get; set; }
         [Required]
-        public int CourseId { get; set; }
-        public Course Course { get; set; }
+        public int BlogId { get; set; }
+        public Blog Blog { get; set; }
         public string AppUserId { get; set; }
         public AppUser AppUser { get; set; }
     }

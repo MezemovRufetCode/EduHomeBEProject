@@ -26,7 +26,7 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
         {
             ViewBag.CurrentPage = page;
             ViewBag.TotalPage = Math.Ceiling((decimal)_context.Courses.Count() / 3);
-            List<Course> model = _context.Courses.Include(c => c.CourseTags).ThenInclude(ct => ct.Tag).Skip((page - 1) * 3).Take(3).ToList();
+            List<Course> model = _context.Courses.Include(c=>c.Comments).Include(c => c.CourseTags).ThenInclude(ct => ct.Tag).Skip((page - 1) * 3).Take(3).ToList();
             return View(model);
         }
         public IActionResult Create()
@@ -164,6 +164,15 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult Comments(int CourseId)
+        {
+            if (!_context.Comments.Any(c => c.CourseId == CourseId))
+                return RedirectToAction("Index", "Course");
+            List<Comment> comments = _context.Comments.Include(c => c.AppUser).Where(c => c.CourseId == CourseId).ToList();
+            return View(comments);
+        }
+
         public IActionResult Delete(int id)
         {
             Course course = _context.Courses.FirstOrDefault(c => c.Id == id);

@@ -76,9 +76,9 @@
                             <i class="mdi mdi-alert btn-icon-prepend"></i>
                             Delete
                         </a>
-                        <a asp-controller="event" asp-action="features" asp-route-id="@item.Id" class="btn btn-primary btn-icon-text mt-3">
+                        <a asp-controller="event" asp-action="comments" asp-route-EventId="@item.Id" class="btn btn-primary btn-icon-text mt-3">
                             <i class="mdi mdi-alert btn-icon-prepend"></i>
-                            Other Features
+                            Comments (@item.EComments.Count)
                         </a>
                     </td>
                 </tr>

@@ -25,6 +25,7 @@ namespace EduHomeBEProject.DAL
         public DbSet<EventSpeaker> EventSpeakers { get; set; }
         public DbSet<Speaker> Speakers { get; set; }
         public DbSet<EComment> EComments { get; set; }
+        public DbSet<bComment> bComments { get; set; }
 
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<Teacher> Teachers { get; set; }

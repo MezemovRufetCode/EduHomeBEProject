@@ -1,0 +1,73 @@
+﻿@model List<EComment>
+@{
+    ViewData["Title"] = "Comments";
+}
+<div class="container">
+    <div class="d-flex" style="justify-content:flex-end">
+        <a asp-controller="event" asp-action="create" class="btn btn-primary btn-icon-text mt-3">
+            <i class="mdi mdi-upload btn-icon-prepend"></i>
+            Create
+        </a>
+    </div>
+
+    <table class="table table-dark mt-3">
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    User Fullname
+                </th>
+                <th>
+                    Text
+                </th>
+                <th>
+                    Subject
+                </th>
+                <th>
+                    Write date
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var comment in Model)
+            {
+                <tr>
+                    <td>
+                        @comment.Id
+                    </td>
+
+                    <td>
+                        @comment.AppUser.Fullname
+                    </td>
+                    @if (comment.Text.Length > 30)
+                    {
+                        <td data-toggle="tooltip" data-placement="bottom" title="@comment.Text">
+                            @comment.Text.Substring(0, 30)...
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            @comment.Text
+                        </td>
+                    }
+                    <td>
+                        @comment.Subject
+                    </td>
+                    <td>
+                        @comment.WriteTime.ToString("dd MMMM yyyy HH:mm")
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@section Scripts{
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+}

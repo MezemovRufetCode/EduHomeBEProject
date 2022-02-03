@@ -62,6 +62,10 @@
                             <i class="mdi mdi-alert btn-icon-prepend"></i>
                             Delete
                         </a>
+                        <a asp-controller="blog" asp-action="comments" asp-route-BlogId="@blog.Id" class="btn btn-primary btn-icon-text mt-3">
+                            <i class="mdi mdi-alert btn-icon-prepend"></i>
+                            Comments (@blog.Comments.Count)
+                        </a>
                     </td>
                 </tr>
             }

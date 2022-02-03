@@ -23,5 +23,6 @@ namespace EduHomeBEProject.Models
         public string WrittenBy { get; set; }
         [NotMapped]
         public IFormFile ImageFile { get; set; }
+        public List<bComment> Comments { get; set; }
     }
 }

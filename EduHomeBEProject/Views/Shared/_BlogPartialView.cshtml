@@ -11,7 +11,7 @@
             </div>
             <div class="blog-content">
                 <div class="blog-top">
-                    <p>By @blog.WrittenBy  /  @blog.PublishDate  /  <i class="fa fa-comments-o"></i> 4</p>
+                    <p>By @blog.WrittenBy  /  @blog.PublishDate  /  <i class="fa fa-comments-o"></i> @blog.Comments.Count</p>
                 </div>
                 <div class="blog-bottom">
                     <h2><a asp-controller="blog" asp-action="details" asp-route-id="@blog.Id">@blog.Title</a></h2>
