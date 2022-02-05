@@ -28,6 +28,8 @@ namespace EduHomeBEProject.Controllers
             List<Blog> model = _context.Blogs.Include(b=>b.Comments).ThenInclude(b=>b.AppUser).Skip((page - 1) * 3).Take(3).ToList();
             return View(model);
         }
+      
+
         public IActionResult Details(int id)
         {
             Blog blog = _context.Blogs.Include(b=>b.Comments).ThenInclude(b=>b.AppUser).FirstOrDefault(b => b.Id == id);
@@ -38,12 +40,18 @@ namespace EduHomeBEProject.Controllers
             return View(blog);
             //return Content(id.ToString());
         }
-        public IActionResult BlogRightSide(int page = 1)
+        public IActionResult BlogRightSide(/*int page = 1*/)
         {
-            ViewBag.CurrentPage = page;
-            ViewBag.TotalPage = Math.Ceiling((decimal)_context.Blogs.Count() / 3);
-            List<Blog> model = _context.Blogs.Skip((page - 1) * 3).Take(3).ToList();
+            //ViewBag.CurrentPage = page;
+            //ViewBag.TotalPage = Math.Ceiling((decimal)_context.Blogs.Count() / 3);
+            //List<Blog> model = _context.Blogs.Include(b => b.Comments).ThenInclude(b => b.AppUser).Skip((page - 1) * 3).Take(3).ToList();
+            List<Blog> model = _context.Blogs.Include(b => b.Comments).ThenInclude(b => b.AppUser).ToList();
             return View(model);
+        }
+        public IActionResult Search(string search)
+        {
+            List<Blog> blogs = _context.Blogs.Include(b=>b.Comments).ThenInclude(b=>b.AppUser).Where(c => c.Title.ToLower().Contains(search.ToLower())).ToList();
+            return PartialView("_BlogPartialView", blogs);
         }
 
         [Authorize]
@@ -81,6 +89,7 @@ namespace EduHomeBEProject.Controllers
             _context.SaveChanges();
             return RedirectToAction("Details", "Blog", new { id = bcomment.BlogId });
         }
+
 
     }
 }

@@ -30,26 +30,32 @@ namespace EduHomeBEProject.Controllers
             return View(model);
         }
 
-        //public JsonResult GetSearchValue(string search)
+        public IActionResult Search(string search)
+        {
+            List<Course> course = _context.Courses.Where(c => c.Name.ToLower().Trim().Contains(search.ToLower().Trim())).ToList();
+            return PartialView("_CoursePartialView",course);
+        }
+
+        //[HttpPost]
+        //public async Task<IActionResult> Index(string CrsSearch)
         //{
-        //    List<Course> allsearch = _context.Courses.Where(x => x.Name.Contains(search)).Select(x => new Course
+        //    ViewData["GetCoursedetails"] = CrsSearch;
+        //    var crsqury = from x in _context.Courses select x;
+        //    if (!String.IsNullOrEmpty(CrsSearch))
         //    {
-        //        Id = x.Id,
-        //        Name = x.Name
-        //    }).ToList();
-        //    return new JsonResult { Data = allsearch, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        //        crsqury = crsqury.Where(x => x.Name.Contains(CrsSearch));
+        //    }
+        //    return View(await crsqury.AsNoTracking().ToListAsync());
         //}
 
-        [HttpGet]
-        public async Task<IActionResult> Index(string CrsSearch)
+        public IActionResult RelatedCourses(int id)
         {
-            ViewData["GetCoursedetails"] = CrsSearch;
-            var crsqury = from x in _context.Courses select x;
-            if (!String.IsNullOrEmpty(CrsSearch))
+            List<Course> courses = _context.Courses.Include(c => c.Category).Where(c => c.Category.Id == id).ToList();
+            if (courses == null)
             {
-                crsqury = crsqury.Where(x => x.Name.Contains(CrsSearch));
+                return NotFound();
             }
-            return View(await crsqury.AsNoTracking().ToListAsync());
+            return View(courses);
         }
 
         public IActionResult Details(int id)
@@ -65,16 +71,8 @@ namespace EduHomeBEProject.Controllers
             return View(course);
         }
 
-        public IActionResult RelatedCourses(int id)
-        {
-            List<Course> courses = _context.Courses.Include(c => c.Category).Where(c => c.Category.Id == id).ToList();
-            if (courses == null)
-            {
-                return NotFound();
-            }
-            return View(courses);
-        }
 
+        #region Comment
         [Authorize]
         [AutoValidateAntiforgeryToken]
         [HttpPost]
@@ -106,10 +104,10 @@ namespace EduHomeBEProject.Controllers
             if (!_context.Comments.Any(c => c.Id == id  && c.AppUserId == user.Id))
                 return NotFound();
             Comment comment = _context.Comments.FirstOrDefault(c => c.Id == id && c.AppUserId == user.Id);
-
             _context.Comments.Remove(comment);
             _context.SaveChanges();
             return RedirectToAction("Details", "Course", new { id = comment.CourseId });
         }
+        #endregion
     }
 }

@@ -1,6 +1,6 @@
-﻿@model List<Blog>
+﻿@model List<Event>
 @{
-    ViewData["Title"] = "BlogRightSide";
+    ViewData["Title"] = "EventRightSide";
 }
 
 <!-- Banner Area Start -->
@@ -11,7 +11,7 @@
                 <div class="col-xs-12">
                     <div class="banner-content-wrapper">
                         <div class="banner-content">
-                            <h2>blog / right side bar</h2>
+                            <h2>event / right side bar</h2>
                         </div>
                     </div>
                 </div>
@@ -21,19 +21,19 @@
 </div>
 <!-- Banner Area End -->
 <!-- Blog Start -->
-<div class="blog-area pt-150 pb-150">
+<div class="blog-area event-area three text-center pt-150 pb-90">
     <div class="container">
         <div class="row">
             <div class="col-md-8">
                 <div class="row" id="Old-Courses">
-                    @await Html.PartialAsync("_BlogPartialView")
+                    @await Html.PartialAsync("_EventPartialView")
                 </div>
                 <div class="row" id="New-Courses">
 
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="blog-sidebar right">
+                <div class="blog-sidebar right text-left">
                     <div class="single-blog-widget mb-50">
                         <h3>search</h3>
                         <div class="blog-search">
@@ -123,45 +123,8 @@
         </div>
     </div>
 </div>
-<div id="pgnt" class="container" style="display:flex;justify-content:center">
-    <div class="row justify-content-center mt-5">
-        <nav aria-label="...">
-            <ul class="pagination justify-content-center">
-                @if (ViewBag.CurrentPage == 1)
-                {
-                    <li class="page-item disabled">
-                        <a class="page-link" asp-controller="blog" asp-action="blogrightside" asp-route-page="@(ViewBag.CurrentPage-1)">Previous</a>
-                    </li>
-                }
-                else
-                {
-                    <li class="page-item">
-                        <a class="page-link" asp-controller="blog" asp-action="blogrightside" asp-route-page="@(ViewBag.CurrentPage-1)">Previous</a>
-                    </li>
-                }
-
-                @for (int i = 1; i <= ViewBag.TotalPage; i++)
-                {
-                    <li class="page-item @(ViewBag.CurrentPage==i ? "active" : "")
-                                " style="@(ViewBag.CurrentPage==i ? "pointer-events:none" : "")"><a asp-controller="blog" asp-action="blogrightside" asp-route-page="@i" class="page-link">@i</a></li>
-                            }
-
-                @if (ViewBag.CurrentPage == ViewBag.TotalPage)
-                {
-                    <li class="page-item disabled">
-                        <a class="page-link" asp-controller="blog" asp-action="blogrightside" asp-route-page="@(ViewBag.CurrentPage+1)">Next</a>
-                    </li>
-                }
-                else
-                {
-                    <li class="page-item">
-                        <a class="page-link" asp-controller="blog" asp-action="blogrightside" asp-route-page="@(ViewBag.CurrentPage+1)">Next</a>
-                    </li>
-                }
-            </ul>
-        </nav>
-    </div>
-</div>
+<!-- Blog End -->
+<!-- Subscribe Start -->
 <div class="subscribe-area pt-60 pb-70">
     <div class="container">
         <div class="row">
@@ -191,13 +154,14 @@
         </div>
     </div>
 </div>
+<!-- Subscribe End -->
 @section Scripts{
     <script>
         $(document).on("keyup", '#Course-Search', function () {
             $("#New-Courses").empty()
             if ($(this).val().length > 0) {
                 $.ajax({
-                    url: '/Blog/Search',
+                    url: '/Event/Search',
                     data: {
                         "search": $(this).val(),
                     },

@@ -28,6 +28,31 @@ namespace EduHomeBEProject.Controllers
             List<Event> model = _context.Events.Include(e=>e.EventSpeakers).ThenInclude(es=>es.Speaker).Skip((page - 1) * 3).Take(3).ToList();
             return View(model);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Index(string EvSearch)
+        {
+            ViewData["GetEventdetails"] = EvSearch;
+            var evqury = from x in _context.Events select x;
+            if (!String.IsNullOrEmpty(EvSearch))
+            {
+                evqury = evqury.Where(x => x.Name.Contains(EvSearch));
+            }
+            return View(await evqury.AsNoTracking().ToListAsync());
+        }
+        public IActionResult Search(string search)
+        {
+            List<Event> events = _context.Events.Where(c => c.Name.ToLower().Trim().Contains(search.ToLower().Trim())).ToList();
+            return PartialView("_EventPartialView", events);
+        }
+        public IActionResult EventRightSide(/*int page = 1*/)
+        {
+            //ViewBag.CurrentPage = page;
+            //ViewBag.TotalPage = Math.Ceiling((decimal)_context.Blogs.Count() / 3);
+            //List<Blog> model = _context.Blogs.Include(b => b.Comments).ThenInclude(b => b.AppUser).Skip((page - 1) * 3).Take(3).ToList();
+            List<Event> events = _context.Events.Include(e => e.EventSpeakers).ThenInclude(es => es.Speaker).Include(e => e.EComments).ThenInclude(e => e.AppUser).ToList();
+            return View(events);
+        }
         public IActionResult Details(int id)
         {
             Event eventt = _context.Events.Include(e=>e.EventSpeakers).ThenInclude(es=>es.Speaker).Include(e=>e.EComments).ThenInclude(e=>e.AppUser).FirstOrDefault(c => c.Id == id);

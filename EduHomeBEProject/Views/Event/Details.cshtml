@@ -111,8 +111,8 @@
                     <div class="single-blog-widget mb-50">
                         <h3>search</h3>
                         <div class="blog-search">
-                            <form id="search" action="#">
-                                <input type="search" placeholder="Search..." name="search" />
+                            <form method="post" asp-action="Index" id="search">
+                                <input id="searchInput" type="search" placeholder="Search..." value="@ViewData["GetEventdetails"]" name="EvSearch" />
                                 <button type="submit">
                                     <span><i class="fa fa-search"></i></span>
                                 </button>

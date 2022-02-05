@@ -1,11 +1,11 @@
 ﻿@model List<Event>
 @foreach (var eventt in Model)
 {
-    <div class="col-md-4 col-sm-6 col-xs-12">
-        <div class="single-event mb-60" style="height:490px;width:300px">
+    <div class="col-md-6 col-sm-6 col-xs-12 col-lg-4" style="width:400px">
+        <div class="single-event mb-60">
             <div class="event-img">
                 <a asp-controller="event" asp-action="details" asp-route-id="@eventt.Id">
-                    <img src="~/assets/img/event/@eventt.Image" alt="event">
+                    <img style="height:280px;width:369px" src="~/assets/img/event/@eventt.Image" alt="event">
                     <div class="course-hover">
                     </div>
                 </a>

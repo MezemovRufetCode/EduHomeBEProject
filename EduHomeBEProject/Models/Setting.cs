@@ -14,8 +14,6 @@ namespace EduHomeBEProject.Models
         [Required]
         [StringLength(maximumLength: 200)]
         public string TopHeaderAnnounce { get; set; }
-        [Required]
-        [StringLength(maximumLength: 200)]
         public string Logo { get; set; }
         [Required]
         [StringLength(maximumLength: 500)]
@@ -32,9 +30,7 @@ namespace EduHomeBEProject.Models
         [StringLength(maximumLength: 200)]
         [Required]
         public string SubscribeSecTitle { get; set; }
-        [Required]
-        [StringLength(maximumLength: 200)]
-        public string FooterLogo { get; set; }
+        //public string FooterLogo { get; set; }
         [StringLength(maximumLength: 400)]
         [Required]
         public string FooterDesc { get; set; }
@@ -63,9 +59,9 @@ namespace EduHomeBEProject.Models
         [Required]
         public string Email { get; set; }
         [NotMapped]
-        public IFormFile  HLImgFile { get; set; }
-        [NotMapped]
-        public IFormFile FLImgFile { get; set; }
+        public IFormFile ImageFile { get; set; }
+        //[NotMapped]
+        //public IFormFile FLImgFile { get; set; }
 
     }
 }

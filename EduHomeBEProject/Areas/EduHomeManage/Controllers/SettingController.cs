@@ -16,7 +16,7 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
     public class SettingController : Controller
     {
         private readonly AppDbContext _context;
-        private IWebHostEnvironment _env;
+        private readonly IWebHostEnvironment _env;
         public SettingController(AppDbContext context, IWebHostEnvironment env)
         {
             _context = context;
@@ -29,6 +29,7 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
         }
         public IActionResult Edit(int id)
         {
+            if (!ModelState.IsValid) return View();
             Setting setting = _context.Settings.FirstOrDefault(s => s.Id == id);
             return View(setting);
         }
@@ -37,43 +38,22 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(Setting setting)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(setting);
-            }
             Setting exset = _context.Settings.FirstOrDefault(s => s.Id == setting.Id);
-            if (setting.FLImgFile != null)
+            if (!ModelState.IsValid) return View();
+              if (setting.ImageFile != null)
             {
-
-                if (!setting.FLImgFile.IsImage())
+                if (!setting.ImageFile.IsImage())
                 {
-                    ModelState.AddModelError("FLImgFile", "Please select image file");
+                    ModelState.AddModelError("ImageFile", "Please select image file only");
                     return View(exset);
                 }
-                if (!setting.FLImgFile.CheckSize(2))
+                if (!setting.ImageFile.CheckSize(2))
                 {
-                    ModelState.AddModelError("FLImgFile", "Image size can be max 2 mb");
-                    return View(exset);
-                }
-
-                Helpers.Helper.DeleteImg(_env.WebRootPath, "assets/img/logo", exset.FooterLogo);
-                exset.FooterLogo = setting.FLImgFile.SaveImg(_env.WebRootPath, "assets/img/logo");
-            }
-
-            if (setting.HLImgFile != null)
-            {
-                if (!setting.HLImgFile.CheckSize(2))
-                {
-                    ModelState.AddModelError("HLImgFile", "Image size max can be 2mb");
-                    return View(exset);
-                }
-                if (!setting.HLImgFile.IsImage())
-                {
-                    ModelState.AddModelError("HLImgFile", "Please select image file");
+                    ModelState.AddModelError("ImageFile", "Image size max can be 2 mb");
                     return View(exset);
                 }
                 Helpers.Helper.DeleteImg(_env.WebRootPath, "assets/img/logo", exset.Logo);
-                exset.Logo = setting.HLImgFile.SaveImg(_env.WebRootPath, "assets/img/logo");
+                exset.Logo = setting.ImageFile.SaveImg(_env.WebRootPath, "assets/img/logo");
             }
 
             exset.TopHeaderAnnounce = setting.TopHeaderAnnounce;

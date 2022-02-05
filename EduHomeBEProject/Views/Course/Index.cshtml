@@ -28,22 +28,25 @@
                     <h3>search courses</h3>
                 </div>
                 <div class="course-form">
-                    <form method="get" asp-action="Index" id="search">
-                        <input id="searchInput" type="search" placeholder="Search..." value="@ViewData["GetCoursedetails"]" name="CrsSearch" />
+                    <form>
+                        <input id="Course-Search" type="search" placeholder="Search..."/>
                         <button type="submit">search</button>
                     </form>
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row" id="Old-Courses">
             @await Html.PartialAsync("_CoursePartialView")
+        </div>
+        <div class="row" id="New-Courses">
+
         </div>
     </div>
 </div>
 
 
 @*Pagination*@
-<div class="container" style="display:flex;justify-content:center">
+<div id="pgnt" class="container" style="display:flex;justify-content:center">
     <div class="row justify-content-center mt-5">
         <nav aria-label="...">
             <ul class="pagination justify-content-center">
@@ -113,25 +116,28 @@
 </div>
 <!-- Subscribe End -->
 
-@*@section Scripts{
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+@section Scripts{
     <script>
-        $("#searchInput").autocomplete({
-            source: function (request, response) {
+        $(document).on("keyup", '#Course-Search', function () {
+            $("#New-Courses").empty()
+            if ($(this).val().length > 0) {
                 $.ajax({
-                    url: '@Url.Action("GetSearchValue","Home")',
-                    dataType: "json",
-                    data: { search: $("searchInput").val() },
-                    success: function (data) {
-                        response($.map(data, function (item) {
-                            return { label: item.Name, value: item.Name };
-                        }));
+                    url: '/Course/Search',
+                    data: {
+                        "search": $(this).val(),
                     },
-                    error: function (xhr, status, error) {
-                        alert("Error");
+                    type: "Get",
+                    success: function (res) {
+                        $("#Old-Courses").css("display", "none")
+                        $("#New-Courses").append(res)
+                        $("#pgnt").css("display", "none")
                     }
                 })
             }
+            else {
+                $("#Old-Courses").css("display", "block")
+                $("#pgnt").css("display", "flex")
+            }
         })
     </script>
-}*@
+}

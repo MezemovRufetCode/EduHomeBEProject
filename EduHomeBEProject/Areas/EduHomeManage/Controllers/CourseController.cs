@@ -166,7 +166,6 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
-
         public IActionResult Comments(int CourseId)
         {
             if (!_context.Comments.Any(c => c.CourseId == CourseId))

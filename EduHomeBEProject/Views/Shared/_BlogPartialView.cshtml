@@ -1,10 +1,10 @@
 ﻿@model List<Blog>
 @foreach (Blog blog in Model)
 {
-    <div class="col-md-4 col-sm-6 col-xs-12">
+    <div class="col-md-6 col-sm-6 col-xs-12 col-lg-4" style="width:400px">
         <div class="single-blog mb-60">
             <div class="blog-img">
-                <a asp-controller="blog" asp-action="details" asp-route-id="@blog.Id"><img src="~/assets/img/blog/@blog.Image" alt="blog"></a>
+                <a asp-controller="blog" asp-action="details" asp-route-id="@blog.Id"><img  src="~/assets/img/blog/@blog.Image" alt="blog"></a>
                 <div class="blog-hover">
                     <i class="fa fa-link"></i>
                 </div>
@@ -13,7 +13,7 @@
                 <div class="blog-top">
                     <p>By @blog.WrittenBy  /  @blog.PublishDate  /  <i class="fa fa-comments-o"></i> @blog.Comments.Count</p>
                 </div>
-                <div class="blog-bottom">
+                <div class="blog-bottom" style="height:161px">
                     <h2><a asp-controller="blog" asp-action="details" asp-route-id="@blog.Id">@blog.Title</a></h2>
                     <a asp-controller="blog" asp-action="details" asp-route-id="@blog.Id">read more</a>
                 </div>

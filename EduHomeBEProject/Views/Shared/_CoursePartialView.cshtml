@@ -1,8 +1,8 @@
 ﻿@model List<Course>
 @foreach (var course in Model)
 {
-    <div class="col-md-4 col-sm-6 col-xs-12" style="margin-top:20px !important">
-        <div class="single-course" style="width:294px;height:435px">
+    <div class="col-md-4 col-sm-6 col-xs-12" style="margin-top:50px !important;height:435px">
+        <div class="single-course" style="height:435px">
             <div class="course-img">
                 <a asp-controller="course" asp-action="details" asp-route-id="@course.Id">
                     <img src="~/assets/img/course/@course.Image" alt="course">
@@ -11,7 +11,7 @@
                     </div>
                 </a>
             </div>
-            <div class="course-content">
+            <div class="course-content" style="height:220px">
                 <h3><a asp-controller="course" asp-action="details" asp-route-id="@course.Id" asp-route-categoryId="@course.CategoryId">@course.Name</a></h3>
                 @if (course.Description.Length > 120)
                 {
@@ -22,7 +22,7 @@
                     <p>@course.Description</p>
                 }
 
-                <a class="default-btn" asp-controller="course" asp-action="details" asp-route-id="@course.Id">read more</a>
+                <a style="position:relative" class="default-btn" asp-controller="course" asp-action="details" asp-route-id="@course.Id">read more</a>
             </div>
         </div>
     </div>
