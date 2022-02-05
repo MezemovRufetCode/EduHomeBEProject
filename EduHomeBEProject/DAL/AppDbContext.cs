@@ -35,6 +35,6 @@ namespace EduHomeBEProject.DAL
         public DbSet<Hobby> Hobbies { get; set; }
         public DbSet<TeacherHobby> TeacherHobbies { get; set; }
         public DbSet<AdrContact> AdrContacts { get; set; }
-
+        public DbSet<NoticeBoard> NoticeBoards { get; set; }
     }
 }

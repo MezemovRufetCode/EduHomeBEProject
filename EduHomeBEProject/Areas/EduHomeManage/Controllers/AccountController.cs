@@ -1,5 +1,6 @@
 ﻿using EduHomeBEProject.Models;
 using EduHomeBEProject.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
 {
     [Area("EduHomeManage")]
+    [Authorize(Roles = "SuperAdmin,Admin")]
     public class AccountController : Controller
     {
         private readonly UserManager<AppUser> _userManager;

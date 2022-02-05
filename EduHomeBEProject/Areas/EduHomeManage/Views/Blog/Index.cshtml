@@ -54,16 +54,16 @@
                         @blog.WrittenBy
                     </td>
                     <td>
-                        <a asp-controller="blog" asp-action="edit" asp-route-id="@blog.Id" class="btn btn-primary btn-icon-text mt-3">
-                            <i class="mdi mdi-file-check btn-icon-append"></i>
+                        <a asp-controller="blog" asp-action="edit" asp-route-id="@blog.Id" class="btn btn-warning btn-icon-text mt-3">
+                            <i class="fas fa-edit"></i>
                             Edit
                         </a>
-                        <a asp-controller="blog" asp-action="delete" asp-route-id="@blog.Id" class="btn btn-primary btn-icon-text mt-3 delete-item">
-                            <i class="mdi mdi-alert btn-icon-prepend"></i>
+                        <a asp-controller="blog" asp-action="delete" asp-route-id="@blog.Id" class="btn btn-danger btn-icon-text mt-3 delete-item">
+                            <i class="fas fa-trash-alt"></i>
                             Delete
                         </a>
                         <a asp-controller="blog" asp-action="comments" asp-route-BlogId="@blog.Id" class="btn btn-primary btn-icon-text mt-3">
-                            <i class="mdi mdi-alert btn-icon-prepend"></i>
+                            <i class="fas fa-comments"></i>
                             Comments (@blog.Comments.Count)
                         </a>
                     </td>
@@ -71,8 +71,6 @@
             }
         </tbody>
     </table>
-
-
     @*pagination*@
 
     <div class="container" style="display:flex;justify-content:center">

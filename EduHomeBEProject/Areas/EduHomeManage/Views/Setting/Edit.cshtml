@@ -1,0 +1,117 @@
+﻿@model Setting
+@{
+    ViewData["Title"] = "Edit";
+}
+@section CSS{
+    <style>
+        label {
+            font-weight: bold !important;
+        }
+    </style>
+}
+<div class="container">
+    <h2 class="mt-3">Edit Settings</h2>
+    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+    <form class="mt-3" method="post">
+        <div style="display:flex;justify-content:space-around">
+            <div class="col-lg-5">
+                <div class="mb-3">
+                    <label asp-for="@Model.HLImgFile" class="form-label">Select header logo image</label>
+                    <input asp-for="@Model.HLImgFile" accept="image/*" class="form-control">
+                    <span class="text text-danger" asp-validation-for="@Model.HLImgFile"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.TopHeaderAnnounce" class="form-label">Header Announce</label>
+                    <input asp-for="@Model.TopHeaderAnnounce" class="form-control">
+                    <span class="text text-danger" asp-validation-for="@Model.TopHeaderAnnounce"></span>
+                </div>
+                <h4 class="mb-3 mt-3">Section Titles</h4>
+                <div class="mb-3">
+                    <label asp-for="@Model.CourseSecTitle" class="form-label">Course Section Title</label>
+                    <input asp-for="@Model.CourseSecTitle" class="form-control">
+                    <span class="text text-danger" asp-validation-for="@Model.CourseSecTitle"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.EventSecTitle" class="form-label">Event Section Title</label>
+                    <input asp-for="@Model.EventSecTitle" class="form-control">
+                    <span class="text text-danger" asp-validation-for="@Model.EventSecTitle"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.BlogSecTitle" class="form-label">Blog Section Title</label>
+                    <input asp-for="@Model.BlogSecTitle" class="form-control">
+                    <span class="text text-danger" asp-validation-for="@Model.BlogSecTitle"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.SubscribeSecTitle" class="form-label">Subscribe Section Title</label>
+                    <input asp-for="@Model.SubscribeSecTitle" class="form-control">
+                    <span class="text text-danger" asp-validation-for="@Model.SubscribeSecTitle"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.WelcomeEntry" class="form-label">Welcome message</label>
+                    <textarea asp-for="@Model.WelcomeEntry" class="form-control" rows="3"></textarea>
+                    <span class="text text-danger" asp-validation-for="@Model.WelcomeEntry"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.FooterDesc" class="form-label">Footer Description</label>
+                    <textarea asp-for="@Model.FooterDesc" class="form-control" rows="3"></textarea>
+                    <span class="text text-danger" asp-validation-for="@Model.FooterDesc"></span>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="mb-3">
+                    <label asp-for="@Model.FLImgFile" class="form-label">Select footer logo image</label>
+                    <input asp-for="@Model.FLImgFile" accept="image/*" class="form-control">
+                    <span class="text text-danger" asp-validation-for="@Model.FLImgFile"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="@Model.Adress" class="form-label">Adress</label>
+                    <input asp-for="@Model.Adress" class="form-control">
+                    <span class="text text-danger" asp-validation-for="@Model.Adress"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.FContact" class="form-label">Contact 1</label>
+                    <input asp-for="@Model.FContact" class="form-control">
+                    <span class="text text-danger" asp-validation-for="@Model.FContact"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.SContact" class="form-label">Contact 2</label>
+                    <input asp-for="@Model.SContact" class="form-control">
+                    <span class="text text-danger" asp-validation-for="@Model.SContact"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.Email" class="form-label">Email Adress</label>
+                    <input asp-for="@Model.Email" class="form-control">
+                    <span class="text text-danger" asp-validation-for="@Model.Email"></span>
+                </div>
+                <h4 class="mb-3 mt-3">Socials</h4>
+                <div class="mb-3">
+                    <label asp-for="@Model.FacebookLink" class="form-label">Facebook account</label>
+                    <input asp-for="@Model.FacebookLink" class="form-control">
+                    <span class="text text-danger" asp-validation-for="@Model.FacebookLink"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.TwitterLink" class="form-label">Twitter Account</label>
+                    <input asp-for="@Model.TwitterLink" class="form-control">
+                    <span class="text text-danger" asp-validation-for="@Model.TwitterLink"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.VimeoLink" class="form-label">Vimeo Link</label>
+                    <input asp-for="@Model.VimeoLink" class="form-control">
+                    <span class="text text-danger" asp-validation-for="@Model.VimeoLink"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.PinterestLink" class="form-label">Pinterest Account</label>
+                    <input asp-for="@Model.PinterestLink" class="form-control">
+                    <span class="text text-danger" asp-validation-for="@Model.PinterestLink"></span>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Edit</button>
+    </form>
+</div>
+@section Scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js" integrity="sha512-o6XqxgrUsKmchwy9G5VRNWSSxTS4Urr4loO6/0hYdpWmFUfHqGzawGxeQGMDqYzxjY9sbktPbNlkIQJWagVZQg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+}

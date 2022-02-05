@@ -62,15 +62,15 @@
                     }
                     <td>
                         <a asp-controller="course" asp-action="edit" asp-route-id="@course.Id" class="btn btn-primary btn-icon-text mt-3">
-                            <i class="mdi mdi-file-check btn-icon-append"></i>
+                            <i class="fas fa-edit"></i>
                             Edit
                         </a>
                         <a asp-controller="course" asp-action="delete" asp-route-id="@course.Id" class="btn btn-primary btn-icon-text mt-3 delete-item">
-                            <i class="mdi mdi-alert btn-icon-prepend"></i>
+                            <i class="fas fa-trash-alt"></i>
                             Delete
                         </a>
                         <a asp-controller="course" asp-action="comments" asp-route-CourseId="@course.Id" class="btn btn-primary btn-icon-text mt-3">
-                            <i class="mdi mdi-alert btn-icon-prepend"></i>
+                            <i class="fas fa-comments"></i>
                             Comments (@course.Comments.Count)
                         </a>
                     </td>

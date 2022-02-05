@@ -37,44 +37,44 @@
         <tbody>
             @foreach (Teacher teacher in Model)
             {
-            <tr>
-                <td>
-                    @teacher.Id
-                </td>
-                <td>
-                    <img style="width:100px;height:60px;object-fit:contain;border-radius:0px" src="~/assets/img/teacher/@teacher.Image" alt="course image" />
-                </td>
-
-                <td>
-                    @teacher.Name
-                </td>
-
-                <td>
-                    @teacher.Position
-                </td>
-                @if (teacher.About.Length > 20)
-                {
+                <tr>
                     <td>
-                        @teacher.About.Substring(0, 17)...
+                        @teacher.Id
                     </td>
-                }
-                else
-                {
                     <td>
-                        @teacher.About
+                        <img style="width:100px;height:60px;object-fit:contain;border-radius:0px" src="~/assets/img/teacher/@teacher.Image" alt="course image" />
                     </td>
-                }
-                <td>
-                    <a asp-controller="teacher" asp-action="edit" asp-route-id="@teacher.Id" class="btn btn-primary btn-icon-text mt-3">
-                        <i class="mdi mdi-file-check btn-icon-append"></i>
-                        Edit
-                    </a>
-                    <a asp-controller="teacher" asp-action="delete" asp-route-id="@teacher.Id" class="btn btn-primary btn-icon-text mt-3 delete-item">
-                        <i class="mdi mdi-alert btn-icon-prepend"></i>
-                        Delete
-                    </a>
-                </td>
-            </tr>
+
+                    <td>
+                        @teacher.Name
+                    </td>
+
+                    <td>
+                        @teacher.Position
+                    </td>
+                    @if (teacher.About.Length > 20)
+                    {
+                        <td>
+                            @teacher.About.Substring(0, 17)...
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            @teacher.About
+                        </td>
+                    }
+                    <td>
+                        <a asp-controller="teacher" asp-action="edit" asp-route-id="@teacher.Id" class="btn btn-primary btn-icon-text mt-3">
+                            <i class="fas fa-edit"></i>
+                            Edit
+                        </a>
+                        <a asp-controller="teacher" asp-action="delete" asp-route-id="@teacher.Id" class="btn btn-primary btn-icon-text mt-3 delete-item">
+                            <i class="fas fa-trash-alt"></i>
+                            Delete
+                        </a>
+                    </td>
+                </tr>
             }
         </tbody>
     </table>
@@ -154,14 +154,9 @@
                                 )
                             }
                         })
-
                     }
                 })
-
-
-
             })
         })
-
     </script>
 }

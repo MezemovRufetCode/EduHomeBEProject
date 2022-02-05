@@ -69,15 +69,15 @@
                     </td>
                     <td>
                         <a asp-controller="event" asp-action="edit" asp-route-id="@item.Id" class="btn btn-primary btn-icon-text mt-3">
-                            <i class="mdi mdi-file-check btn-icon-append"></i>
+                            <i class="fas fa-edit"></i>
                             Edit
                         </a>
                         <a asp-controller="event" asp-action="delete" asp-route-id="@item.Id" class="btn btn-primary btn-icon-text mt-3 delete-item">
-                            <i class="mdi mdi-alert btn-icon-prepend"></i>
+                            <i class="fas fa-trash-alt"></i>
                             Delete
                         </a>
                         <a asp-controller="event" asp-action="comments" asp-route-EventId="@item.Id" class="btn btn-primary btn-icon-text mt-3">
-                            <i class="mdi mdi-alert btn-icon-prepend"></i>
+                            <i class="fas fa-comments"></i>
                             Comments (@item.EComments.Count)
                         </a>
                     </td>

@@ -1,5 +1,6 @@
 ﻿using EduHomeBEProject.DAL;
 using EduHomeBEProject.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
 {
     [Area("EduHomeManage")]
+    [Authorize(Roles = "SuperAdmin,Admin")]
     public class FacultyController : Controller
     {
         private readonly AppDbContext _context;

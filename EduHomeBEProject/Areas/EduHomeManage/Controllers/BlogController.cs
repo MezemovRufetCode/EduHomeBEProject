@@ -1,6 +1,7 @@
 ﻿using EduHomeBEProject.DAL;
 using EduHomeBEProject.Extensions;
 using EduHomeBEProject.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
 {
     [Area("EduHomeManage")]
+    [Authorize(Roles = "SuperAdmin,Admin")]
     public class BlogController : Controller
     {
         private readonly AppDbContext _context;
@@ -25,7 +27,7 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
         {
             ViewBag.CurrentPage = page;
             ViewBag.TotalPage = Math.Ceiling((decimal)_context.Blogs.Count() / 3);
-            List<Blog> model = _context.Blogs.Include(b=>b.Comments).Skip((page - 1) * 3).Take(3).ToList();
+            List<Blog> model = _context.Blogs.Include(b => b.Comments).Skip((page - 1) * 3).Take(3).ToList();
             return View(model);
         }
         public IActionResult Create()
@@ -56,9 +58,17 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
             }
             blog.Image = blog.ImageFile.SaveImg(_env.WebRootPath, "assets/img/blog");
 
-            _context.Blogs.Add(blog);
-            _context.SaveChanges();
+            Blog blg = new Blog
+            {
+                Title = blog.Title,
+                Desc = blog.Desc,
+                PublishDate = DateTime.Now,
+                Image = blog.Image,
+                WrittenBy = User.Identity.Name
+            };
 
+            _context.Blogs.Add(blg);
+            _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
         public IActionResult Edit(int id)

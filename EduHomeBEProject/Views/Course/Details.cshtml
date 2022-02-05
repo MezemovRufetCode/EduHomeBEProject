@@ -137,10 +137,10 @@
 
                             }
                             @*<li><a href="#">Political Science (12)</a></li>
-                            <li><a href="#">Micro Biology (08)</a></li>
-                            <li><a href="#">HTML5 &amp; CSS3 (15)</a></li>
-                            <li><a href="#">Web Design (20)</a></li>
-                            <li><a href="#">PHP (23)</a></li>*@
+                                <li><a href="#">Micro Biology (08)</a></li>
+                                <li><a href="#">HTML5 &amp; CSS3 (15)</a></li>
+                                <li><a href="#">Web Design (20)</a></li>
+                                <li><a href="#">PHP (23)</a></li>*@
                         </ul>
                     </div>
                     <div class="single-blog-widget mb-50">
@@ -151,48 +151,60 @@
                     </div>
                     <div class="single-blog-widget mb-50">
                         <h3>latest post</h3>
-                        <div class="single-post mb-30">
-                            <div class="single-post-img">
-                                <a href="blog-details.html">
-                                    <img src="~/assets/img/post/post1.jpg" alt="post">
-                                    <div class="blog-hover">
-                                        <i class="fa fa-link"></i>
-                                    </div>
-                                </a>
+
+                        @foreach (var blog in ViewBag.LatestBlogs)
+                        {
+                            <div class="single-post mb-30">
+                                <div class="single-post-img">
+                                    <a href="blog-details.html">
+                                        <img style="width:95px;height:84px" src="~/assets/img/blog/@blog.Image" alt="post">
+                                        <div class="blog-hover">
+                                            <i class="fa fa-link"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="single-post-content">
+                                    @if (blog.Title.Length > 30)   
+                                    {
+                                        <h4><a href="blog-details.html">@blog.Title.Substring(0,30)</a></h4>
+                                    }
+                                    else
+                                    {
+                                        <h4><a href="blog-details.html">@blog.Title</a></h4>
+                                    }
+
+                                    <p>@blog.WrittenBy  /  @blog.PublishDate</p>
+                                </div>
                             </div>
-                            <div class="single-post-content">
-                                <h4><a href="blog-details.html">English Language Course for you</a></h4>
-                                <p>By Alex  /  June 20, 2017</p>
+
+                        }
+                        @*<div class="single-post mb-30">
+                                <div class="single-post-img">
+                                    <a href="blog-details.html">
+                                        <img src="~/assets/img/post/post2.jpg" alt="post">
+                                        <div class="blog-hover">
+                                            <i class="fa fa-link"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="single-post-content">
+                                    <h4><a href="blog-details.html">Advance Web Design and Develop</a></h4>
+                                </div>
                             </div>
-                        </div>
-                        <div class="single-post mb-30">
-                            <div class="single-post-img">
-                                <a href="blog-details.html">
-                                    <img src="~/assets/img/post/post2.jpg" alt="post">
-                                    <div class="blog-hover">
-                                        <i class="fa fa-link"></i>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="single-post-content">
-                                <h4><a href="blog-details.html">Advance Web Design and Develop</a></h4>
-                                <p>By Alex  /  June 20, 2017</p>
-                            </div>
-                        </div>
-                        <div class="single-post">
-                            <div class="single-post-img">
-                                <a href="blog-details.html">
-                                    <img src="~/assets/img/post/post3.jpg" alt="post">
-                                    <div class="blog-hover">
-                                        <i class="fa fa-link"></i>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="single-post-content">
-                                <h4><a href="blog-details.html">English Language Course for you</a></h4>
-                                <p>By Alex  /  June 20, 2017</p>
-                            </div>
-                        </div>
+                            <div class="single-post">
+                                <div class="single-post-img">
+                                    <a href="blog-details.html">
+                                        <img src="~/assets/img/post/post3.jpg" alt="post">
+                                        <div class="blog-hover">
+                                            <i class="fa fa-link"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="single-post-content">
+                                    <h4><a href="blog-details.html">English Language Course for you</a></h4>
+                                    <p>By Alex  /  June 20, 2017</p>
+                                </div>
+                            </div>*@
                     </div>
                     <div class="single-blog-widget">
                         <h3>tags</h3>

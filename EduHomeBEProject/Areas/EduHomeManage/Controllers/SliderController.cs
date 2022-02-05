@@ -1,6 +1,7 @@
 ﻿using EduHomeBEProject.DAL;
 using EduHomeBEProject.Extensions;
 using EduHomeBEProject.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
 {
     [Area("EduHomeManage")]
+    [Authorize(Roles = "SuperAdmin,Admin")]
     public class SliderController : Controller
     {
         private readonly AppDbContext _context;

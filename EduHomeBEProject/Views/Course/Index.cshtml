@@ -28,8 +28,8 @@
                     <h3>search courses</h3>
                 </div>
                 <div class="course-form">
-                    <form id="search" action="#">
-                        <input type="search" placeholder="Search..." name="search" />
+                    <form method="get" asp-action="Index" id="search">
+                        <input id="searchInput" type="search" placeholder="Search..." value="@ViewData["GetCoursedetails"]" name="CrsSearch" />
                         <button type="submit">search</button>
                     </form>
                 </div>
@@ -43,7 +43,6 @@
 
 
 @*Pagination*@
-
 <div class="container" style="display:flex;justify-content:center">
     <div class="row justify-content-center mt-5">
         <nav aria-label="...">
@@ -83,8 +82,6 @@
         </nav>
     </div>
 </div>
-
-
 <div class="subscribe-area pt-60 pb-70">
     <div class="container">
         <div class="row">
@@ -115,3 +112,26 @@
     </div>
 </div>
 <!-- Subscribe End -->
+
+@*@section Scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $("#searchInput").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: '@Url.Action("GetSearchValue","Home")',
+                    dataType: "json",
+                    data: { search: $("searchInput").val() },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.Name, value: item.Name };
+                        }));
+                    },
+                    error: function (xhr, status, error) {
+                        alert("Error");
+                    }
+                })
+            }
+        })
+    </script>
+}*@

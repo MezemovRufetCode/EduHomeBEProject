@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="~/admin/assets/css/style.css">
     <!-- endinject -->
     <link rel="shortcut icon" href="~/admin/assets/images/favicon.png" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 </head>
 <body>
     <div class="container-scroller">
@@ -218,6 +219,12 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" asp-controller="speaker" asp-action="index">
+                            <i class="mdi mdi-view-headline menu-icon"></i>
+                            <span class="menu-title">Speakers</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" asp-controller="blog" asp-action="index">
                             <i class="mdi mdi-view-headline menu-icon"></i>
                             <span class="menu-title">Blogs</span>
@@ -240,6 +247,30 @@
                         <a class="nav-link" asp-controller="Hobby" asp-action="index">
                             <i class="mdi mdi-view-headline menu-icon"></i>
                             <span class="menu-title">Teacher hobbies</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="slider" asp-action="index">
+                            <i class="mdi mdi-view-headline menu-icon"></i>
+                            <span class="menu-title">Slider</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Setting" asp-action="index">
+                            <i class="mdi mdi-view-headline menu-icon"></i>
+                            <span class="menu-title">Settings</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Contact" asp-action="index">
+                            <i class="mdi mdi-view-headline menu-icon"></i>
+                            <span class="menu-title">Adresses</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="noticeboard" asp-action="index">
+                            <i class="mdi mdi-view-headline menu-icon"></i>
+                            <span class="menu-title">Notice Board</span>
                         </a>
                     </li>
                 </ul>

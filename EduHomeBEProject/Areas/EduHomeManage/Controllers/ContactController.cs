@@ -1,5 +1,6 @@
 ﻿using EduHomeBEProject.DAL;
 using EduHomeBEProject.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
 {
     [Area("EduHomeManage")]
+    [Authorize(Roles = "SuperAdmin,Admin")]
     public class ContactController : Controller
     {
         private readonly AppDbContext _context;

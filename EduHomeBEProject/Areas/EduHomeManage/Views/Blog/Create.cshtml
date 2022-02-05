@@ -2,7 +2,13 @@
 @{
     ViewData["Title"] = "Create";
 }
-
+@section CSS{
+    <style>
+        label {
+            font-weight: bold !important;
+        }
+    </style>
+}
 <div class="container">
     <h2 class="mt-3">Create blog</h2>
     <form class="mt-3" method="post" enctype="multipart/form-data">
@@ -21,17 +27,17 @@
             <textarea asp-for="@Model.Desc" class=" form-control" rows="3"></textarea>
             <span class="text text-danger" asp-validation-for="@Model.Desc"></span>
         </div>
-        <div class="mb-3">
-            <label asp-for="@Model.PublishDate" class="form-label">Publish Date</label>
-            <input asp-for="@Model.PublishDate" class=" form-control">
-            <span class="text text-danger" asp-validation-for="@Model.PublishDate"></span>
-        </div>
+        @*<div class="mb-3">
+                <label asp-for="@Model.PublishDate" class="form-label">Publish Date</label>
+                <input asp-for="@Model.PublishDate" class=" form-control">
+                <span class="text text-danger" asp-validation-for="@Model.PublishDate"></span>
+            </div>*@
 
-        <div class="mb-3">
-            <label asp-for="@Model.WrittenBy" class="form-label">Publisher</label>
-            <input asp-for="@Model.WrittenBy" class=" form-control">
-            <span class="text text-danger" asp-validation-for="@Model.WrittenBy"></span>
-        </div>
+        @*<div class="mb-3">
+                <label asp-for="@Model.WrittenBy" class="form-label">Publisher</label>
+                <input asp-for="@Model.WrittenBy" class=" form-control">
+                <span class="text text-danger" asp-validation-for="@Model.WrittenBy"></span>
+            </div>*@
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>

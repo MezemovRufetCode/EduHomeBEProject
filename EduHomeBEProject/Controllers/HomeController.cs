@@ -26,13 +26,12 @@ namespace EduHomeBEProject.Controllers
                 Sliders = _context.Sliders.ToList(),
                 Settings = _context.Settings.FirstOrDefault(),
                 Categories=_context.Categories.ToList(),
-                //Courses = _context.Courses.Include(c => c.Category).Include(c => c.CourseTags).ThenInclude(ct => ct.Tag).ToList()
                 Courses =_context.Courses.Include(c=>c.CourseTags).ThenInclude(ct=>ct.Tag).ToList(),
                 Events=_context.Events.ToList(),
-                Blogs=_context.Blogs.ToList()
+                Blogs=_context.Blogs.ToList(),
+                NoticeBoards = _context.NoticeBoards.ToList()
             };
             return View(homeVM);
         }
-
     }
 }

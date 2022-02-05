@@ -30,9 +30,32 @@ namespace EduHomeBEProject.Controllers
             return View(model);
         }
 
+        //public JsonResult GetSearchValue(string search)
+        //{
+        //    List<Course> allsearch = _context.Courses.Where(x => x.Name.Contains(search)).Select(x => new Course
+        //    {
+        //        Id = x.Id,
+        //        Name = x.Name
+        //    }).ToList();
+        //    return new JsonResult { Data = allsearch, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        //}
+
+        [HttpGet]
+        public async Task<IActionResult> Index(string CrsSearch)
+        {
+            ViewData["GetCoursedetails"] = CrsSearch;
+            var crsqury = from x in _context.Courses select x;
+            if (!String.IsNullOrEmpty(CrsSearch))
+            {
+                crsqury = crsqury.Where(x => x.Name.Contains(CrsSearch));
+            }
+            return View(await crsqury.AsNoTracking().ToListAsync());
+        }
+
         public IActionResult Details(int id)
         {
             ViewBag.Categories = _context.Categories.Include(c=>c.Courses).ToList();
+            ViewBag.LatestBlogs = _context.Blogs.OrderBy(b=>b.PublishDate).Take(3).ToList();
             Course course = _context.Courses.Include(c => c.CourseTags).ThenInclude(ct => ct.Tag).Include(c=>c.Comments).ThenInclude(c=>c.AppUser).Include(c=>c.Category).ThenInclude(c=>c.Courses).FirstOrDefault(c => c.Id == id);
             if (course == null)
             {
@@ -40,6 +63,16 @@ namespace EduHomeBEProject.Controllers
             }
             //ViewBag.RelatedCourse = _context.Categories.FirstOrDefault(c => c.Id == categoryId);
             return View(course);
+        }
+
+        public IActionResult RelatedCourses(int id)
+        {
+            List<Course> courses = _context.Courses.Include(c => c.Category).Where(c => c.Category.Id == id).ToList();
+            if (courses == null)
+            {
+                return NotFound();
+            }
+            return View(courses);
         }
 
         [Authorize]
