@@ -37,10 +37,15 @@ namespace EduHomeBEProject.Controllers
         {
             HomeVM homeSearchVM = new HomeVM()
             {
-                Courses = _context.Courses.Where(c => c.Name.ToLower().Trim().Contains(search.ToLower().Trim())).ToList(),
-                Events = _context.Events.Where(c => c.Name.ToLower().Trim().Contains(search.ToLower().Trim())).ToList(),
-                Blogs = _context.Blogs.Include(b => b.Comments).ThenInclude(b => b.AppUser).Where(c => c.Title.ToLower().Contains(search.ToLower())).ToList(),
-                Teachers=_context.Teachers.Where(c => c.Name.ToLower().Trim().Contains(search.ToLower().Trim())).ToList()
+                Courses = search == null ? _context.Courses.ToList() : _context.Courses.Where(c => c.Name.ToLower().Trim().Contains(search.ToLower().Trim())).ToList(),
+                Events = search == null ? _context.Events.ToList() : _context.Events.Where(c => c.Name.ToLower().Trim().Contains(search.ToLower().Trim())).ToList(),
+                Blogs = search == null ? _context.Blogs.Include(b => b.Comments).ThenInclude(b => b.AppUser).ToList() : _context.Blogs.Include(b => b.Comments).ThenInclude(b => b.AppUser).Where(c => c.Title.ToLower().Contains(search.ToLower())).ToList(),
+                Teachers = search == null ? _context.Teachers.ToList() : _context.Teachers.Where(c => c.Name.ToLower().Trim().Contains(search.ToLower().Trim())).ToList()
+
+                //Courses = _context.Courses.Where(c => c.Name.ToLower().Trim().Contains(search.ToLower().Trim())).ToList(),
+                //Events = _context.Events.Where(c => c.Name.ToLower().Trim().Contains(search.ToLower().Trim())).ToList(),
+                //Blogs = _context.Blogs.Include(b => b.Comments).ThenInclude(b => b.AppUser).Where(c => c.Title.ToLower().Contains(search.ToLower())).ToList(),
+                //Teachers=_context.Teachers.Where(c => c.Name.ToLower().Trim().Contains(search.ToLower().Trim())).ToList()
             };
             return View(homeSearchVM);
         }
