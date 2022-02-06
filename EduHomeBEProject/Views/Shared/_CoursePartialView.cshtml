@@ -1,7 +1,7 @@
 ﻿@model List<Course>
 @foreach (var course in Model)
 {
-    <div class="col-md-4 col-sm-6 col-xs-12" style="margin-top:50px !important;height:435px">
+    <div class="col-md-4 col-sm-6 col-xs-12 item" style="margin-top:50px !important;height:435px">
         <div class="single-course" style="height:435px">
             <div class="course-img">
                 <a asp-controller="course" asp-action="details" asp-route-id="@course.Id">

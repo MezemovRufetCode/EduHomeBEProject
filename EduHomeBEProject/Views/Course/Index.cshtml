@@ -29,13 +29,13 @@
                 </div>
                 <div class="course-form">
                     <form>
-                        <input id="Course-Search" type="search" placeholder="Search..."/>
+                        <input id="Course-Search" type="search" placeholder="Search..." />
                         <button type="submit">search</button>
                     </form>
                 </div>
             </div>
         </div>
-        <div class="row" id="Old-Courses">
+        <div class="row items" id="Old-Courses">
             @await Html.PartialAsync("_CoursePartialView")
         </div>
         <div class="row" id="New-Courses">
@@ -44,47 +44,51 @@
     </div>
 </div>
 
+@*view more*@
 
-@*Pagination*@
+@*<div class="buttonToogle" style="display: none;">
+    <a style="padding:10px 20px 10px 20px;color:white;background-color:turquoise" href="javascript:;" class="showMore">+ View More</a>
+</div>*@
+
 <div id="pgnt" class="container" style="display:flex;justify-content:center">
-    <div class="row justify-content-center mt-5">
-        <nav aria-label="...">
-            <ul class="pagination justify-content-center">
-                @if (ViewBag.CurrentPage == 1)
-                {
-                    <li class="page-item disabled">
-                        <a class="page-link" asp-controller="course" asp-action="index" asp-route-page="@(ViewBag.CurrentPage-1)">Previous</a>
-                    </li>
-                }
-                else
-                {
-                    <li class="page-item">
-                        <a class="page-link" asp-controller="course" asp-action="index" asp-route-page="@(ViewBag.CurrentPage-1)">Previous</a>
-                    </li>
-                }
+        <div class="row justify-content-center mt-5">
+            <nav aria-label="...">
+                <ul class="pagination justify-content-center">
+                    @if (ViewBag.CurrentPage == 1)
+                    {
+                        <li class="page-item disabled">
+                            <a class="page-link" asp-controller="course" asp-action="index" asp-route-page="@(ViewBag.CurrentPage-1)">Previous</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item">
+                            <a class="page-link" asp-controller="course" asp-action="index" asp-route-page="@(ViewBag.CurrentPage-1)">Previous</a>
+                        </li>
+                    }
 
-                @for (int i = 1; i <= ViewBag.TotalPage; i++)
-                {
-                    <li class="page-item @(ViewBag.CurrentPage==i ? "active" : "")
-                                " style="@(ViewBag.CurrentPage==i ? "pointer-events:none" : "")"><a asp-controller="course" asp-action="index" asp-route-page="@i" class="page-link">@i</a></li>
-                            }
+                    @for (int i = 1; i <= ViewBag.TotalPage; i++)
+                    {
+                        <li class="page-item @(ViewBag.CurrentPage==i ? "active" : "")
+                                    " style="@(ViewBag.CurrentPage==i ? "pointer-events:none" : "")"><a asp-controller="course" asp-action="index" asp-route-page="@i" class="page-link">@i</a></li>
+                                }
 
-                @if (ViewBag.CurrentPage == ViewBag.TotalPage)
-                {
-                    <li class="page-item disabled">
-                        <a class="page-link" asp-controller="course" asp-action="index" asp-route-page="@(ViewBag.CurrentPage+1)">Next</a>
-                    </li>
-                }
-                else
-                {
-                    <li class="page-item">
-                        <a class="page-link" asp-controller="course" asp-action="index" asp-route-page="@(ViewBag.CurrentPage+1)">Next</a>
-                    </li>
-                }
-            </ul>
-        </nav>
+                    @if (ViewBag.CurrentPage == ViewBag.TotalPage)
+                    {
+                        <li class="page-item disabled">
+                            <a class="page-link" asp-controller="course" asp-action="index" asp-route-page="@(ViewBag.CurrentPage+1)">Next</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item">
+                            <a class="page-link" asp-controller="course" asp-action="index" asp-route-page="@(ViewBag.CurrentPage+1)">Next</a>
+                        </li>
+                    }
+                </ul>
+            </nav>
+        </div>
     </div>
-</div>
 <div class="subscribe-area pt-60 pb-70">
     <div class="container">
         <div class="row">
@@ -117,6 +121,7 @@
 <!-- Subscribe End -->
 
 @section Scripts{
+    @*live search*@
     <script>
         $(document).on("keyup", '#Course-Search', function () {
             $("#New-Courses").empty()
@@ -140,4 +145,41 @@
             }
         })
     </script>
+   @*show more product*@
+    @*<script>
+        $(function () {
+
+            // items to show
+            var increment = 3;
+
+            var startFilter = 0;
+            var endFilter = increment;
+
+            // item selector
+            var $this = $('.items');
+
+            var elementLength = $this.find('div').length;
+            $('.listLength').text(elementLength);
+
+            // show/hide the Load More button
+            if (elementLength > 2) {
+                $('.buttonToogle').show();
+            }
+
+            $('.items .item').slice(startFilter, endFilter).addClass('shown');
+            $('.shownLength').text(endFilter);
+            $('.items .item').not('.shown').hide();
+            $('.buttonToogle .showMore').on('click', function () {
+                if (elementLength > endFilter) {
+                    startFilter += increment;
+                    endFilter += increment;
+                    $('.items .item').slice(startFilter, endFilter).not('.shown').addClass('shown').toggle(500);
+                    $('.shownLength').text((endFilter > elementLength) ? elementLength : endFilter);
+                    if (elementLength <= endFilter) {
+                        $(this).remove();
+                    }
+                }
+            });
+        });
+    </script>*@
 }

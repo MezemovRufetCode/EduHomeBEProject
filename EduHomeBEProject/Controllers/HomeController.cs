@@ -28,7 +28,7 @@ namespace EduHomeBEProject.Controllers
                 Categories=_context.Categories.ToList(),
                 Courses =_context.Courses.Include(c=>c.CourseTags).ThenInclude(ct=>ct.Tag).ToList(),
                 Events=_context.Events.ToList(),
-                Blogs=_context.Blogs.ToList(),
+                Blogs=_context.Blogs.Include(b => b.Comments).ThenInclude(b => b.AppUser).ToList(),
                 NoticeBoards = _context.NoticeBoards.ToList()
             };
             return View(homeVM);

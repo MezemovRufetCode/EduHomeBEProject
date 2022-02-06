@@ -27,6 +27,7 @@ namespace EduHomeBEProject.Controllers
             ViewBag.CurrentPage = page;
             ViewBag.TotalPage = Math.Ceiling((decimal)_context.Courses.Count() / 3);
             List<Course> model = _context.Courses.Include(c => c.CourseTags).ThenInclude(ct => ct.Tag).Skip((page - 1) * 3).Take(3).ToList();
+            //List<Course> model = _context.Courses.Include(c => c.CourseTags).ThenInclude(ct => ct.Tag).ToList();
             return View(model);
         }
 
@@ -36,6 +37,7 @@ namespace EduHomeBEProject.Controllers
             return PartialView("_CoursePartialView",course);
         }
 
+        #region Search Old variant
         //[HttpPost]
         //public async Task<IActionResult> Index(string CrsSearch)
         //{
@@ -47,7 +49,7 @@ namespace EduHomeBEProject.Controllers
         //    }
         //    return View(await crsqury.AsNoTracking().ToListAsync());
         //}
-
+        #endregion
         public IActionResult RelatedCourses(int id)
         {
             List<Course> courses = _context.Courses.Include(c => c.Category).Where(c => c.Category.Id == id).ToList();

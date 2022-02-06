@@ -71,10 +71,15 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row items">
             @await Html.PartialAsync("_CoursePartialView", Model.Courses)
         </div>
     </div>
+</div>
+
+@*view more button*@
+<div class="buttonToogle" style="margin-top:20px;z-index:10000;display:flex;justify-content:center">
+    <a style="padding:10px 20px 10px 20px;color:white;background-color:orangered;border-radius:10px" href="javascript:;" class="showMore">+ View More</a>
 </div>
 <!-- Courses Area End -->
 <!-- Notice Start -->
@@ -122,10 +127,10 @@
                 </div>
             </div>
         </div>
-        <div class="row" style="flex-wrap:wrap;display:flex;">
+        <div class="row itemsEvent" style="flex-wrap:wrap;display:flex;">
             @foreach (var eventt in Model.Events)
             {
-                <div class="single-event mb-35  col-md-6 col-sm-12 col-xs-12">
+                <div class="single-event mb-35  col-md-6 col-sm-12 col-xs-12 iteme">
                     <div class="event-img">
                         <a href="event-details.html"><img style="height:214px;width:197px;object-fit:contain" src="~/assets/img/event/@eventt.Image" alt="event"></a>
                     </div>
@@ -144,8 +149,13 @@
             }
 
         </div>
+        <div class="buttonToogleEvent" style="margin-top:20px;z-index:10000;display:flex;justify-content:center">
+            <a style="padding:10px 20px 10px 20px;color:white;background-color:orangered;border-radius:10px" href="javascript:;" class="showMore">+ View More</a>
+        </div>
+
     </div>
 </div>
+
 <!-- Event Area End -->
 <!-- Testimonial Area Start -->
 <div class="testimonial-area pt-110 pb-105 text-center">
@@ -182,8 +192,10 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            @foreach (var blog in Model.Blogs)
+        <div class="row itemsBlog">
+            @await Html.PartialAsync("_BlogPartialView", Model.Blogs)
+
+            @*@foreach (var blog in Model.Blogs)
             {
                 <div class="col-md-4 col-sm-6 col-xs-12" style="margin-top:20px">
                     <div class="single-blog" style="width:294px;height:377px;">
@@ -204,8 +216,10 @@
                         </div>
                     </div>
                 </div>
-
-            }
+            }*@
+        </div>
+        <div class="buttonToogleBlog" style="margin-top:20px;z-index:10000;display:flex;justify-content:center">
+            <a style="padding:10px 20px 10px 20px;color:white;background-color:orangered;border-radius:10px" href="javascript:;" class="showMore">+ View More</a>
         </div>
     </div>
 </div>
@@ -242,6 +256,8 @@
 </div>
 <!-- Subscribe End -->
 @section Scripts{
+
+@*Verify alert*@
     <script>
         $(document).ready(function () {
             if ($("#verifyJS").length) {
@@ -287,5 +303,113 @@
                 }
             }
         })
+    </script>
+    <script>
+        $(function () {
+
+            // items to show
+            var increment = 3;
+
+            var startFilter = 0;
+            var endFilter = increment;
+
+            // item selector
+            var $this = $('.items');
+
+            var elementLength = $this.find('div').length;
+            $('.listLength').text(elementLength);
+
+            // show/hide the Load More button
+            if (elementLength > 2) {
+                $('.buttonToogle').show();
+            }
+
+            $('.items .item').slice(startFilter, endFilter).addClass('shown');
+            $('.shownLength').text(endFilter);
+            $('.items .item').not('.shown').hide();
+            $('.buttonToogle .showMore').on('click', function () {
+                if (elementLength > endFilter) {
+                    startFilter += increment;
+                    endFilter += increment;
+                    $('.items .item').slice(startFilter, endFilter).not('.shown').addClass('shown').toggle(500);
+                    $('.shownLength').text((endFilter > elementLength) ? elementLength : endFilter);
+                    if (elementLength <= endFilter) {
+                        $(this).remove();
+                    }
+                }
+            });
+        });
+    </script>
+    <script>
+        $(function () {
+
+            // items to show
+            var increment = 3;
+
+            var startFilter = 0;
+            var endFilter = increment;
+
+            // item selector
+            var $this = $('.itemsEvent');
+
+            var elementLength = $this.find('div').length;
+            $('.listLength').text(elementLength);
+
+            // show/hide the Load More button
+            if (elementLength > 2) {
+                $('.buttonToogleEvent').show();
+            }
+
+            $('.itemsEvent .iteme').slice(startFilter, endFilter).addClass('shown');
+            $('.shownLength').text(endFilter);
+            $('.itemsEvent .iteme').not('.shown').hide();
+            $('.buttonToogleEvent .showMore').on('click', function () {
+                if (elementLength > endFilter) {
+                    startFilter += increment;
+                    endFilter += increment;
+                    $('.itemsEvent .iteme').slice(startFilter, endFilter).not('.shown').addClass('shown').toggle(500);
+                    $('.shownLength').text((endFilter > elementLength) ? elementLength : endFilter);
+                    if (elementLength <= endFilter) {
+                        $(this).remove();
+                    }
+                }
+            });
+        });
+    </script>
+    <script>
+        $(function () {
+
+            // items to show
+            var increment = 3;
+
+            var startFilter = 0;
+            var endFilter = increment;
+
+            // item selector
+            var $this = $('.itemsBlog');
+
+            var elementLength = $this.find('div').length;
+            $('.listLength').text(elementLength);
+
+            // show/hide the Load More button
+            if (elementLength > 2) {
+                $('.buttonToogleBlog').show();
+            }
+
+            $('.itemsBlog .itemBl').slice(startFilter, endFilter).addClass('shown');
+            $('.shownLength').text(endFilter);
+            $('.itemsBlog .itemBl').not('.shown').hide();
+            $('.buttonToogleBlog .showMore').on('click', function () {
+                if (elementLength > endFilter) {
+                    startFilter += increment;
+                    endFilter += increment;
+                    $('.itemsBlog .itemBl').slice(startFilter, endFilter).not('.shown').addClass('shown').toggle(500);
+                    $('.shownLength').text((endFilter > elementLength) ? elementLength : endFilter);
+                    if (elementLength <= endFilter) {
+                        $(this).remove();
+                    }
+                }
+            });
+        });
     </script>
 }
