@@ -15,6 +15,7 @@ namespace EduHomeBEProject.ViewModels
         public List<Event> Events { get; set; }
         public List<Blog> Blogs { get; set; }
         public List<NoticeBoard> NoticeBoards { get; set; }
+        public List<Teacher> Teachers { get; set; }
         public Setting Settings { get; set; }
     }
 }

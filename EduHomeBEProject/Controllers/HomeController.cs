@@ -33,5 +33,16 @@ namespace EduHomeBEProject.Controllers
             };
             return View(homeVM);
         }
+        public IActionResult SearchEvResult(string search)
+        {
+            HomeVM homeSearchVM = new HomeVM()
+            {
+                Courses = _context.Courses.Where(c => c.Name.ToLower().Trim().Contains(search.ToLower().Trim())).ToList(),
+                Events = _context.Events.Where(c => c.Name.ToLower().Trim().Contains(search.ToLower().Trim())).ToList(),
+                Blogs = _context.Blogs.Include(b => b.Comments).ThenInclude(b => b.AppUser).Where(c => c.Title.ToLower().Contains(search.ToLower())).ToList(),
+                Teachers=_context.Teachers.Where(c => c.Name.ToLower().Trim().Contains(search.ToLower().Trim())).ToList()
+            };
+            return View(homeSearchVM);
+        }
     }
 }

@@ -1,0 +1,39 @@
+﻿@model HomeVM
+@{
+    ViewData["Title"] = "SearchEvResult";
+}
+
+<div class="banner-area-wrapper">
+    <div class="banner-area text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="banner-content-wrapper">
+                        <div class="banner-content">
+                            <h2>Search All Result</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="blog-area pt-150 pb-150">
+    <div class="container">
+        @*@if (Model == null)
+        {
+            <h4>Not Found</h4>
+        }
+        else
+        {*@
+            <div class="row">
+                @await Html.PartialAsync("_HomeSearchPartialView", Model)
+            </div>
+        @*}*@
+
+    </div>
+</div>
+<!-- Banner Area End -->
+<!-- Contact Start -->
+
+<!-- Contact End -->

@@ -1,0 +1,103 @@
+﻿@model HomeVM
+<div style="display:block">
+
+    @foreach (Blog blog in Model.Blogs)
+    {
+        <div class="col-md-6 col-sm-6 col-xs-12 col-lg-4" style="width:400px;height:520px">
+            <div class="single-blog mb-60">
+                <div class="blog-img">
+                    <a asp-controller="blog" asp-action="details" asp-route-id="@blog.Id"><img src="~/assets/img/blog/@blog.Image" alt="blog"></a>
+                    <div class="blog-hover">
+                        <i class="fa fa-link"></i>
+                    </div>
+                </div>
+                <div class="blog-content">
+                    <div class="blog-top">
+                        <p>By @blog.WrittenBy  /  @blog.PublishDate  /  <i class="fa fa-comments-o"></i> @blog.Comments.Count</p>
+                    </div>
+                    <div class="blog-bottom" style="height:161px">
+                        <h2><a asp-controller="blog" asp-action="details" asp-route-id="@blog.Id">@blog.Title</a></h2>
+                        <a asp-controller="blog" asp-action="details" asp-route-id="@blog.Id">read more</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    @foreach (var course in Model.Courses)
+    {
+        <div class="col-md-4 col-sm-6 col-xs-12" style="width:400px;height:520px">
+            <div class="single-course" style="height:435px">
+                <div class="course-img">
+                    <a asp-controller="course" asp-action="details" asp-route-id="@course.Id">
+                        <img src="~/assets/img/course/@course.Image" alt="course">
+                        <div class="course-hover">
+                            <i class="fa fa-link"></i>
+                        </div>
+                    </a>
+                </div>
+                <div class="course-content" style="height:220px">
+                    <h3><a asp-controller="course" asp-action="details" asp-route-id="@course.Id" asp-route-categoryId="@course.CategoryId">@course.Name</a></h3>
+                    @if (course.Description.Length > 120)
+                    {
+                        <p>@course.Description.Substring(0, 120)</p>
+                    }
+                    else
+                    {
+                        <p>@course.Description</p>
+                    }
+
+                    <a style="position:relative" class="default-btn" asp-controller="course" asp-action="details" asp-route-id="@course.Id">read more</a>
+                </div>
+            </div>
+        </div>
+    }
+
+    @foreach (var eventt in Model.Events)
+    {
+        <div class="col-md-6 col-sm-6 col-xs-12 col-lg-4" style="width:400px;height:520px">
+            <div class="single-event mb-60">
+                <div class="event-img">
+                    <a asp-controller="event" asp-action="details" asp-route-id="@eventt.Id">
+                        <img style="height:280px;width:369px" src="~/assets/img/event/@eventt.Image" alt="event">
+                        <div class="course-hover">
+                        </div>
+                    </a>
+                    <div class="event-date">
+                        <h3>@eventt.EventDay.ToString("dd")<span style="font-size:12px">@eventt.EventDay.ToString("MMMM")</span></h3>
+                    </div>
+                </div>
+                <div class="event-content text-left">
+                    <h4><a asp-controller="event" asp-action="details" asp-route-id="@eventt.Id">@eventt.Name</a></h4>
+                    <ul>
+                        <li><span>time:</span> @eventt.StartTime.ToString("HH:mm tt") - @eventt.EndTime.ToString("HH:mm tt")</li>
+                        <li><span>venue</span> @eventt.Location</li>
+                    </ul>
+                    <div class="event-content-right">
+                        <a class="default-btn" asp-controller="event" asp-action="details" asp-route-id="@eventt.Id">join now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    @foreach (var teacher in Model.Teachers)
+    {
+        <div class="col-md-3 col-sm-4 col-xs-12" style="width:400px;height:520px">
+            <div class="single-teacher mb-45">
+                <div class="single-teacher-img">
+                    <a asp-controller="teacher" asp-action="details" asp-route-id="@teacher.Id"><img src="~/assets/img/teacher/@teacher.Image" alt="teacher"></a>
+                </div>
+                <div class="single-teacher-content text-center">
+                    <h2><a href="teacher-details.html">@teacher.Name</a></h2>
+                    <h4>@teacher.Position</h4>
+                    <ul>
+                        <li><a href="https://www.facebook.com/devitems/?ref=bookmarks"><i class="zmdi zmdi-facebook"></i></a></li>
+                        <li><a href="https://www.pinterest.com/devitemsllc/"><i class="zmdi zmdi-pinterest"></i></a></li>
+                        <li><a href="#"><i class="zmdi zmdi-vimeo"></i></a></li>
+                        <li><a href="https://twitter.com/devitemsllc"><i class="zmdi zmdi-twitter"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    }
+</div>
