@@ -170,7 +170,18 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
             exTeach.VimeoAccount = teacher.VimeoAccount;
             exTeach.TwitterAccount = teacher.TwitterAccount;
             exTeach.Pinterest = teacher.Pinterest;
-
+            exTeach.Feature1 = teacher.Feature1;
+            exTeach.Feature2 = teacher.Feature2;
+            exTeach.Feature3 = teacher.Feature3;
+            exTeach.Feature4 = teacher.Feature4;
+            exTeach.Feature5 = teacher.Feature5;
+            exTeach.Feature6 = teacher.Feature6;
+            exTeach.FeatureVal1 = teacher.FeatureVal1;
+            exTeach.FeatureVal2 = teacher.FeatureVal2;
+            exTeach.FeatureVal3 = teacher.FeatureVal3;
+            exTeach.FeatureVal4 = teacher.FeatureVal4;
+            exTeach.FeatureVal5 = teacher.FeatureVal5;
+            exTeach.FeatureVal6 = teacher.FeatureVal6;
 
             exTeach.Name = teacher.Name;
             exTeach.About = teacher.About;
@@ -182,6 +193,15 @@ namespace EduHomeBEProject.Areas.EduHomeManage.Controllers
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
 
+        }
+        public IActionResult Delete(int id)
+        {
+            Teacher teacher = _context.Teachers.FirstOrDefault(t => t.Id == id);
+            if (teacher == null)
+                return Json(new { status = 404 });
+            _context.Teachers.Remove(teacher);
+            _context.SaveChanges();
+            return Json(new { status = 200 });
         }
     }
 }

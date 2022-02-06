@@ -125,8 +125,8 @@
                                 <div class="search">
                                     <div class="search-form">
                                         <form method="get" asp-controller="home" asp-action="searchevresult" id="search-form">
-                                            <input placeholder="Search here..." name="search" />
-                                            <button type="submit">
+                                            <input placeholder="Search here..." onkeyup="DisableButton()"  name="search" id="generalSearch" />
+                                            <button type="submit" disabled id="generalSearchButton">
                                                 <span><i class="fa fa-search"></i></span>
                                             </button>
                                         </form>
@@ -215,6 +215,7 @@
     </footer>
     <!-- Footer End -->
 
+
     <script src="~/assets/js/vendor/jquery-1.12.0.min.js"></script>
     <script src="~/assets/js/bootstrap.min.js"></script>
     <script src="~/assets/js/jquery.meanmenu.js"></script>
@@ -224,10 +225,24 @@
     <script src="~/assets/js/jquery.mb.YTPlayer.js"></script>
     <script src="~/assets/js/jquery.nicescroll.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
     @RenderSection("Scripts", false);
     <script src="~/assets/js/plugins.js"></script>
     <script src="~/assets/js/main.js"></script>
     <script src="~/assets/js/jquery-2.1.4.min.js"></script>
+
+    @*Eger hecne search olunmayibsa error vermesin deye disable elemek*@
+     @*note:Inspectden silseler de butun item cixacaq*@
+
+    <script>
+        function DisableButton() {
+            if (document.getElementById("generalSearch").value === "") {
+                document.getElementById('generalSearchButton').disabled = true;
+            } else {
+                document.getElementById('generalSearchButton').disabled = false;
+            }
+        }
+    </script>
 </body>
 
 <!-- Mirrored from demo.devitems.com/eduhome/index-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 21 Jun 2020 19:41:25 GMT -->

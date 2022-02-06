@@ -4,14 +4,16 @@ using EduHomeBEProject.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EduHomeBEProject.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220206163216_TeacherSkills")]
+    partial class TeacherSkills
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -657,12 +659,6 @@ namespace EduHomeBEProject.Migrations
                     b.Property<string>("Feature4")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Feature5")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Feature6")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("FeatureVal1")
                         .HasColumnType("int");
 
@@ -673,12 +669,6 @@ namespace EduHomeBEProject.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("FeatureVal4")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FeatureVal5")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FeatureVal6")
                         .HasColumnType("int");
 
                     b.Property<string>("Image")

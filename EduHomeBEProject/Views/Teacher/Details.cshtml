@@ -36,8 +36,8 @@
                     <h4>about me</h4>
                     <p>@Model.About</p>
                     <ul>
-                        <li><span>degree: </span>PHD in Micro Biology</li>
-                        <li><span>experience: </span>7 years experience</li>
+                        <li><span>degree: </span>@Model.Degree</li>
+                        <li><span>experience: </span>@Model.Experience</li>
                         <li>
                             <span>
                                 hobbies:
@@ -79,60 +79,60 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="skill-bar-item">
-                                <span>language</span>
+                                <span>@Model.Feature1</span>
                                 <div class="progress">
-                                    <div data-wow-delay="1.2s" data-wow-duration="1.5s" style="width: 85%; visibility: visible; animation-duration: 1.5s; animation-delay: 1.2s; animation-name: fadeInLeft;" data-progress="50%" class="progress-bar wow fadeInLeft">
-                                        <span class="text-top">85%</span>
+                                    <div data-wow-delay="1.2s" data-wow-duration="1.5s" style="width: @Model.FeatureVal1%; visibility: visible; animation-duration: 1.5s; animation-delay: 1.2s; animation-name: fadeInLeft;" data-progress="@Model.FeatureVal1%" class="progress-bar wow fadeInLeft">
+                                        <span class="text-top">@Model.FeatureVal1%</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="skill-bar-item">
-                                <span>team leader</span>
+                                <span>@Model.Feature2</span>
                                 <div class="progress">
-                                    <div data-wow-delay="1.2s" data-wow-duration="1.5s" style="width: 90%; visibility: visible; animation-duration: 1.5s; animation-delay: 1.2s; animation-name: fadeInLeft;" data-progress="50%" class="progress-bar wow fadeInLeft">
-                                        <span class="text-top">90%</span>
+                                    <div data-wow-delay="1.2s" data-wow-duration="1.5s" style="width: @Model.FeatureVal2%; visibility: visible; animation-duration: 1.5s; animation-delay: 1.2s; animation-name: fadeInLeft;" data-progress="@Model.FeatureVal2%" class="progress-bar wow fadeInLeft">
+                                        <span class="text-top">@Model.FeatureVal2%</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="skill-bar-item">
-                                <span>development</span>
+                                <span>@Model.Feature3</span>
                                 <div class="progress">
-                                    <div data-wow-delay="1.2s" data-wow-duration="1.5s" style="width: 85%; visibility: visible; animation-duration: 1.5s; animation-delay: 1.2s; animation-name: fadeInLeft;" data-progress="50%" class="progress-bar wow fadeInLeft">
-                                        <span class="text-top">85%</span>
+                                    <div data-wow-delay="1.2s" data-wow-duration="1.5s" style="width: @Model.FeatureVal3%; visibility: visible; animation-duration: 1.5s; animation-delay: 1.2s; animation-name: fadeInLeft;" data-progress="@Model.FeatureVal3%" class="progress-bar wow fadeInLeft">
+                                        <span class="text-top">@Model.FeatureVal3%</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="skill-bar-item">
-                                <span>design</span>
+                                <span>@Model.Feature4</span>
                                 <div class="progress">
-                                    <div data-wow-delay="1.2s" data-wow-duration="1.5s" style="width: 95%; visibility: visible; animation-duration: 1.5s; animation-delay: 1.2s; animation-name: fadeInLeft;" data-progress="50%" class="progress-bar wow fadeInLeft">
-                                        <span class="text-top">95%</span>
+                                    <div data-wow-delay="1.2s" data-wow-duration="1.5s" style="width: @Model.FeatureVal4%; visibility: visible; animation-duration: 1.5s; animation-delay: 1.2s; animation-name: fadeInLeft;" data-progress="@Model.FeatureVal4%" class="progress-bar wow fadeInLeft">
+                                        <span class="text-top">@Model.FeatureVal4%</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="skill-bar-item">
-                                <span>innovation</span>
+                                <span>@Model.Feature5</span>
                                 <div class="progress">
-                                    <div data-wow-delay="1.2s" data-wow-duration="1.5s" style="width: 85%; visibility: visible; animation-duration: 1.5s; animation-delay: 1.2s; animation-name: fadeInLeft;" data-progress="50%" class="progress-bar wow fadeInLeft">
-                                        <span class="text-top">85%</span>
+                                    <div data-wow-delay="1.2s" data-wow-duration="1.5s" style="width: @Model.FeatureVal5%; visibility: visible; animation-duration: 1.5s; animation-delay: 1.2s; animation-name: fadeInLeft;" data-progress="@Model.FeatureVal5%" class="progress-bar wow fadeInLeft">
+                                        <span class="text-top">@Model.FeatureVal5%</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="skill-bar-item">
-                                <span>communication</span>
+                                <span>@Model.Feature6</span>
                                 <div class="progress">
-                                    <div data-wow-delay="1.2s" data-wow-duration="1.5s" style="width: 95%; visibility: visible; animation-duration: 1.5s; animation-delay: 1.2s; animation-name: fadeInLeft;" data-progress="50%" class="progress-bar wow fadeInLeft">
-                                        <span class="text-top">95%</span>
+                                    <div data-wow-delay="1.2s" data-wow-duration="1.5s" style="width: @Model.FeatureVal6%; visibility: visible; animation-duration: 1.5s; animation-delay: 1.2s; animation-name: fadeInLeft;" data-progress="@Model.FeatureVal6%" class="progress-bar wow fadeInLeft">
+                                        <span class="text-top">@Model.FeatureVal6%</span>
                                     </div>
                                 </div>
                             </div>

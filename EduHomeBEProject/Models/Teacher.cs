@@ -36,10 +36,7 @@ namespace EduHomeBEProject.Models
         [Required]
         [StringLength(maximumLength:100)]
         public string Degree { get; set; }
-
-
         //sonra vaxt qalsa duzelt
-
         [StringLength(maximumLength: 200)]
         public string FacebookAccount { get; set; }
         [StringLength(maximumLength: 200)]
@@ -48,8 +45,6 @@ namespace EduHomeBEProject.Models
         public string Pinterest { get; set; }
         [StringLength(maximumLength: 200)]
         public string TwitterAccount { get; set; }
-
-
         public List<TSocials> Socials { get; set; }
         [NotMapped]
         public IFormFile ImageFile { get; set; }
@@ -59,5 +54,18 @@ namespace EduHomeBEProject.Models
         public List<TeacherHobby> TeacherHobbies { get; set; }
         [NotMapped]
         public List<int> HobbyIds { get; set; }
+
+        public string Feature1 { get; set; }
+        public int FeatureVal1 { get; set; }
+        public string Feature2 { get; set; }
+        public int FeatureVal2 { get; set; }
+        public string Feature3 { get; set; }
+        public int FeatureVal3 { get; set; }
+        public string Feature4 { get; set; }
+        public int FeatureVal4 { get; set; }
+        public string Feature5 { get; set; }
+        public int FeatureVal5 { get; set; }
+        public string Feature6 { get; set; }
+        public int FeatureVal6 { get; set; }
     }
 }
