@@ -8,181 +8,198 @@
             font-weight: bold !important;
         }
     </style>
+    @*<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>*@
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!------ Include the above in your HEAD tag ---------->
 }
 <div class="container">
-    <h2 class="mt-3">Create teacher</h2>
+    <h2 style="margin:40px 65px 40px">Create teacher</h2>
     @*enctype imageleri idare etmek ucun*@
-    <form class="mt-3" method="post" enctype="multipart/form-data">
-        <div style="display:flex;justify-content:space-around">
-            <div class="col-5">
-                <div class="mb-3">
-                    <label asp-for="@Model.ImageFile" class="form-label">Select Image</label>
-                    <input asp-for="@Model.ImageFile" accept="image/*" class="form-control">
-                    <span class="text text-danger" asp-validation-for="@Model.ImageFile"></span>
-                </div>
-                <div class="mb-3">
-                    <label asp-for="@Model.Name" class="form-label">Name</label>
-                    <input asp-for="@Model.Name" class="form-control">
-                    <span class="text text-danger" asp-validation-for="@Model.Name"></span>
-                </div>
-                <div class="mb-3">
-                    <label asp-for="@Model.Position" class="form-label">Position</label>
-                    <input asp-for="@Model.Position" class="form-control">
-                    <span class="text text-danger" asp-validation-for="@Model.Position"></span>
-                </div>
-                <div class="mb-3">
-                    <label asp-for="@Model.Email" class="form-label">Email</label>
-                    <input asp-for="@Model.Email" class="form-control">
-                    <span class="text text-danger" asp-validation-for="@Model.Email"></span>
-                </div>
-                <div class="mb-3">
-                    <label asp-for="@Model.Phone" class="form-label">Phone</label>
-                    <input asp-for="@Model.Phone" class="form-control">
-                    <span class="text text-danger" asp-validation-for="@Model.Phone"></span>
-                </div>
-                <div class="mb-3">
-                    <label asp-for="@Model.Degree" class="form-label">Degree</label>
-                    <input asp-for="@Model.Degree" class="form-control">
-                    <span class="text text-danger" asp-validation-for="@Model.Degree"></span>
-                </div>
-                <div class="mb-3">
-                    <label asp-for="@Model.Experience" class="form-label">Experience</label>
-                    <input asp-for="@Model.Experience" class="form-control">
-                    <span class="text text-danger" asp-validation-for="@Model.Experience"></span>
-                </div>
-                <div class="mb-3">
-                    <label asp-for="@Model.About" class="form-label">About</label>
-                    <textarea asp-for="@Model.About" class=" form-control" rows="3"></textarea>
-                    <span class="text text-danger" asp-validation-for="@Model.About"></span>
-                </div>
-                <div class="mb-3">
-                    <label asp-for="@Model.HobbyIds" class="form-label">Hobbies</label>
-                    <select asp-for="@Model.HobbyIds" class="form-select" asp-items="@(new SelectList(ViewBag.Hobbies,"Id","Name"))">
-                    </select>
-                    <span class="text text-danger" asp-validation-for="@Model.HobbyIds"></span>
-                </div>
-
-                @*<div class="card mt-5">
-                        <div class="card-header">
-                            Add Feature
-                        </div>
-                        <div class="card-body">
-                            <form id="product_form">
-                                <div class="row" id="row1">
-                                    <div class="col-7">
-                                        <label>Feature</label>
-                                        <input style="margin-top:10px" name="product1" class="form-control" type="text"
-                                               placeholder="Feature name" />
-                                    </div>
-                                    <div class="col-4">
-                                        <label>Point on 100</label>
-                                        <input style="margin-top:10px" name="price1" class="form-control" type="text"
-                                               placeholder="Value" />
-                                    </div>
-                                </div>
-                            </form>
-                            <button type="button" style="width:170px" class="btn float-right btn-dark mt-2"
-                                    onclick="add_more_field()">
-                                Add More +
-                            </button>
-                        </div>
-                    </div>*@
-
+<form class="mt-3" method="post" enctype="multipart/form-data">
+    <div style="display:flex;justify-content:space-around">
+        <div class="col-5">
+            <div class="mb-3">
+                <label asp-for="@Model.ImageFile" class="form-label">Select Image</label>
+                <input asp-for="@Model.ImageFile" accept="image/*" class="form-control">
+                <span class="text text-danger" asp-validation-for="@Model.ImageFile"></span>
             </div>
-            <div class="col-5">
+            <div class="mb-3">
+                <label asp-for="@Model.Name" class="form-label">Name</label>
+                <input asp-for="@Model.Name" class="form-control">
+                <span class="text text-danger" asp-validation-for="@Model.Name"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.Position" class="form-label">Position</label>
+                <input asp-for="@Model.Position" class="form-control">
+                <span class="text text-danger" asp-validation-for="@Model.Position"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.Email" class="form-label">Email</label>
+                <input asp-for="@Model.Email" class="form-control">
+                <span class="text text-danger" asp-validation-for="@Model.Email"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.Phone" class="form-label">Phone</label>
+                <input asp-for="@Model.Phone" class="form-control">
+                <span class="text text-danger" asp-validation-for="@Model.Phone"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.Degree" class="form-label">Degree</label>
+                <input asp-for="@Model.Degree" class="form-control">
+                <span class="text text-danger" asp-validation-for="@Model.Degree"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.Experience" class="form-label">Experience</label>
+                <input asp-for="@Model.Experience" class="form-control">
+                <span class="text text-danger" asp-validation-for="@Model.Experience"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.About" class="form-label">About</label>
+                <textarea asp-for="@Model.About" class=" form-control" rows="3"></textarea>
+                <span class="text text-danger" asp-validation-for="@Model.About"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.HobbyIds" class="form-label">Hobbies</label>
+                <select asp-for="@Model.HobbyIds" class="form-select" asp-items="@(new SelectList(ViewBag.Hobbies,"Id","Name"))">
+                </select>
+                <span class="text text-danger" asp-validation-for="@Model.HobbyIds"></span>
+            </div>
+        </div>
+        <div class="col-5">
 
-                <div class="mb-3">
-                    <label asp-for="@Model.FacultyIds" class="form-label">Faculties</label>
-                    <select asp-for="@Model.FacultyIds" class="form-select" asp-items="@(new SelectList(ViewBag.Faculties,"Id","Name"))">
-                    </select>
-                    <span class="text text-danger" asp-validation-for="@Model.FacultyIds"></span>
+            <div class="mb-3">
+                <label asp-for="@Model.FacultyIds" class="form-label">Faculties</label>
+                <select asp-for="@Model.FacultyIds" class="form-select" asp-items="@(new SelectList(ViewBag.Faculties,"Id","Name"))">
+                </select>
+                <span class="text text-danger" asp-validation-for="@Model.FacultyIds"></span>
+            </div>
+            <h4 class="mt-3 mb-3">Socails</h4>
+            <div class="mb-2">
+                <label asp-for="@Model.FacebookAccount" class="form-label">Facebook account</label>
+                <input asp-for="@Model.FacebookAccount" class=" form-control">
+                <span class="text text-danger" asp-validation-for="@Model.FacebookAccount"></span>
+            </div>
+            <div class="mb-2">
+                <label asp-for="@Model.TwitterAccount" class="form-label">Twitter account</label>
+                <input asp-for="@Model.TwitterAccount" class=" form-control">
+                <span class="text text-danger" asp-validation-for="@Model.TwitterAccount"></span>
+            </div>
+            <div class="mb-2">
+                <label asp-for="@Model.Pinterest" class="form-label">Pinterest</label>
+                <input asp-for="@Model.Pinterest" class=" form-control">
+                <span class="text text-danger" asp-validation-for="@Model.Pinterest"></span>
+            </div>
+            <div class="mb-2">
+                <label asp-for="@Model.VimeoAccount" class="form-label">Vimeo Account</label>
+                <input asp-for="@Model.VimeoAccount" class=" form-control">
+                <span class="text text-danger" asp-validation-for="@Model.VimeoAccount"></span>
+            </div>
+            <h4 class="mt-3 mb-3">Top 6 feature</h4>
+            <div style="display:flex">
+                <div style="padding-left:0px" class="mb-2 col-9">
+                    <input asp-for="@Model.Feature1" placeholder="Feature 1" class=" form-control">
+                    <span class="text text-danger" asp-validation-for="@Model.Feature1"></span>
                 </div>
-                <h4 class="mt-3 mb-3">Socails</h4>
-                <div class="mb-2">
-                    <label asp-for="@Model.FacebookAccount" class="form-label">Facebook account</label>
-                    <input asp-for="@Model.FacebookAccount" class=" form-control">
-                    <span class="text text-danger" asp-validation-for="@Model.FacebookAccount"></span>
+                <div class="mb-2 col-4">
+                    <input asp-for="@Model.FeatureVal1" min="0" max="100" placeholder="Rate on 100" class=" form-control">
+                    <span class="text text-danger" asp-validation-for="@Model.FeatureVal1"></span>
                 </div>
-                <div class="mb-2">
-                    <label asp-for="@Model.TwitterAccount" class="form-label">Twitter account</label>
-                    <input asp-for="@Model.TwitterAccount" class=" form-control">
-                    <span class="text text-danger" asp-validation-for="@Model.TwitterAccount"></span>
+            </div>
+            <div style="display:flex">
+                <div style="padding-left:0px" class="mb-2 col-9">
+                    <input asp-for="@Model.Feature2" placeholder="Feature 2" class=" form-control">
+                    <span class="text text-danger" asp-validation-for="@Model.Feature2"></span>
                 </div>
-                <div class="mb-2">
-                    <label asp-for="@Model.Pinterest" class="form-label">Pinterest</label>
-                    <input asp-for="@Model.Pinterest" class=" form-control">
-                    <span class="text text-danger" asp-validation-for="@Model.Pinterest"></span>
+                <div class="mb-2 col-4">
+                    <input asp-for="@Model.FeatureVal2" min="0" max="100" placeholder="Rate on 100" class=" form-control">
+                    <span class="text text-danger" asp-validation-for="@Model.FeatureVal2"></span>
                 </div>
-                <div class="mb-2">
-                    <label asp-for="@Model.VimeoAccount" class="form-label">Vimeo Account</label>
-                    <input asp-for="@Model.VimeoAccount" class=" form-control">
-                    <span class="text text-danger" asp-validation-for="@Model.VimeoAccount"></span>
+            </div>
+            <div style="display:flex">
+                <div style="padding-left:0px" class="mb-2 col-9">
+                    <input asp-for="@Model.Feature3" placeholder="Feature 3" class=" form-control">
+                    <span class="text text-danger" asp-validation-for="@Model.Feature3"></span>
                 </div>
-                <h4 class="mt-3 mb-3">Top 6 feature</h4>
-                <div style="display:flex">
-                    <div class="mb-2 col-9">
-                        <input asp-for="@Model.Feature1" placeholder="Feature 1" class=" form-control">
-                        <span class="text text-danger" asp-validation-for="@Model.Feature1"></span>
-                    </div>
-                    <div class="mb-2 col-3">
-                        <input asp-for="@Model.FeatureVal1" min="0" max="100" placeholder="Rate on 100" class=" form-control">
-                        <span class="text text-danger" asp-validation-for="@Model.FeatureVal1"></span>
-                    </div>
+                <div class="mb-2 col-4">
+                    <input asp-for="@Model.FeatureVal3" min="0" max="100" placeholder="Rate on 100" class=" form-control">
+                    <span class="text text-danger" asp-validation-for="@Model.FeatureVal3"></span>
                 </div>
-                <div style="display:flex">
-                    <div class="mb-2 col-9">
-                        <input asp-for="@Model.Feature2" placeholder="Feature 2" class=" form-control">
-                        <span class="text text-danger" asp-validation-for="@Model.Feature2"></span>
-                    </div>
-                    <div class="mb-2 col-3">
-                        <input asp-for="@Model.FeatureVal2" min="0" max="100" placeholder="Rate on 100" class=" form-control">
-                        <span class="text text-danger" asp-validation-for="@Model.FeatureVal2"></span>
-                    </div>
+            </div>
+            <div style="display:flex">
+                <div style="padding-left:0px" class="mb-2 col-9">
+                    <input asp-for="@Model.Feature4" placeholder="Feature 4" class=" form-control">
+                    <span class="text text-danger" asp-validation-for="@Model.Feature4"></span>
                 </div>
-                <div style="display:flex">
-                    <div class="mb-2 col-9">
-                        <input asp-for="@Model.Feature3" placeholder="Feature 3" class=" form-control">
-                        <span class="text text-danger" asp-validation-for="@Model.Feature3"></span>
-                    </div>
-                    <div class="mb-2 col-3">
-                        <input asp-for="@Model.FeatureVal3" min="0" max="100" placeholder="Rate on 100" class=" form-control">
-                        <span class="text text-danger" asp-validation-for="@Model.FeatureVal3"></span>
-                    </div>
+                <div class="mb-2 col-4">
+                    <input asp-for="@Model.FeatureVal4" min="0" max="100" placeholder="Rate on 100" class=" form-control">
+                    <span class="text text-danger" asp-validation-for="@Model.FeatureVal4"></span>
                 </div>
-                <div style="display:flex">
-                    <div class="mb-2 col-9">
-                        <input asp-for="@Model.Feature4" placeholder="Feature 4" class=" form-control">
-                        <span class="text text-danger" asp-validation-for="@Model.Feature4"></span>
-                    </div>
-                    <div class="mb-2 col-3">
-                        <input asp-for="@Model.FeatureVal4" min="0" max="100" placeholder="Rate on 100" class=" form-control">
-                        <span class="text text-danger" asp-validation-for="@Model.FeatureVal4"></span>
-                    </div>
+            </div>
+            <div style="display:flex">
+                <div style="padding-left:0px" class="mb-2 col-9">
+                    <input asp-for="@Model.Feature5" placeholder="Feature 5" class=" form-control">
+                    <span class="text text-danger" asp-validation-for="@Model.Feature5"></span>
                 </div>
-                <div style="display:flex">
-                    <div class="mb-2 col-9">
-                        <input asp-for="@Model.Feature5" placeholder="Feature 5" class=" form-control">
-                        <span class="text text-danger" asp-validation-for="@Model.Feature5"></span>
-                    </div>
-                    <div class="mb-2 col-3">
-                        <input asp-for="@Model.FeatureVal5" min="0" max="100" placeholder="Rate on 100" class=" form-control">
-                        <span class="text text-danger" asp-validation-for="@Model.FeatureVal5"></span>
-                    </div>
+                <div class="mb-2 col-4">
+                    <input asp-for="@Model.FeatureVal5" min="0" max="100" placeholder="Rate on 100" class=" form-control">
+                    <span class="text text-danger" asp-validation-for="@Model.FeatureVal5"></span>
                 </div>
-                <div style="display:flex">
-                    <div class="mb-2 col-9">
-                        <input asp-for="@Model.Feature6" placeholder="Feature 6" class=" form-control">
-                        <span class="text text-danger" asp-validation-for="@Model.Feature6"></span>
-                    </div>
-                    <div class="mb-2 col-3">
-                        <input asp-for="@Model.FeatureVal6" min="0" max="100" placeholder="Rate on 100" class=" form-control">
-                        <span class="text text-danger" asp-validation-for="@Model.FeatureVal6"></span>
-                    </div>
+            </div>
+            <div style="display:flex">
+                <div style="padding-left:0px" class="mb-2 col-9">
+                    <input asp-for="@Model.Feature6" placeholder="Feature 6" class=" form-control">
+                    <span class="text text-danger" asp-validation-for="@Model.Feature6"></span>
+                </div>
+                <div class="mb-2 col-4">
+                    <input asp-for="@Model.FeatureVal6" min="0" max="100" placeholder="Rate on 100" class=" form-control">
+                    <span class="text text-danger" asp-validation-for="@Model.FeatureVal6"></span>
                 </div>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    </div>
+
+
+
+    <div style="margin-left:25px;border:1px solid black" class="col-xs-12">
+        <div class="col-md-12">
+            <h3 style="margin:30px 28px"> Features</h3>
+            <div id="field">
+                <div id="field0" style="display:flex">
+                    <!-- Text input-->
+                    <div class="form-group col-6">
+                        <label style="margin-top:10px" class="col-md-4 control-label" for="action_id">Feature</label>
+                        <div class="col-12">
+                            <input id="action_id" name="action_id" type="text" placeholder="" class="form-control input-md">
+                        </div>
+                    </div>
+                    <br><br>
+                    <!-- Text input-->
+                    <div class="form-group col-5">
+                        <label style="margin-top:10px;margin-left:15px" class="control-label" for="action_name">Point on 100</label>
+                        <div class="col-3">
+                            <input id="action_name" name="action_name" min="0" max="100" type="number" placeholder="" class="form-control input-md">
+                        </div>
+                    </div>
+                    <br><br>
+                </div>
+            </div>
+            <!-- Button -->
+            <div class="form-group">
+                <div class="col-md-4">
+                    <button style="margin-left:16px" id="add-more" name="add-more" class="btn btn-primary">Add More</button>
+                </div>
+            </div>
+            <br><br>
+
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" style="margin:20px 0">Submit</button>
+</form>
 </div>
 
 @section Scripts{
@@ -190,21 +207,33 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js" integrity="sha512-o6XqxgrUsKmchwy9G5VRNWSSxTS4Urr4loO6/0hYdpWmFUfHqGzawGxeQGMDqYzxjY9sbktPbNlkIQJWagVZQg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-        var counter = 1;
-        function add_more_field() {
-            counter += 1
-            html = ' <div class="row" id="row' + counter + '">\
-                        <div class="col-7" >\
-                                    <label>Feature</label>\
-                                    <input style="margin-top:10px" name="product'+ counter + '" class="form-control" type="text" placeholder="Feature name" />\
-                                </div >\
-                        <div class="col-4">\
-                            <label>Point on 100</label>\
-                            <input style="margin-top:10px" name="price'+ counter + '" class="form-control" type="text" placeholder="Value" />\
-                        </div>\
-                            </div >'
-            var form = document.getElementById('product_form')
-            form.innerHTML += html
-        }
+        $(document).ready(function () {
+            var next = 0;
+            $("#add-more").click(function (e) {
+                e.preventDefault();
+                var addto = "#field" + next;
+                var addRemove = "#field" + (next);
+                next = next + 1;
+                var newIn = ' <div id="field' + next + '" name="field' + next + '" style="display:flex"><!-- Text input--><div class="form-group col-6"> <label class="col-md-4 control-label" for="action_id" style="margin-top:10px">Feature</label> <div class="col-12"> <input id="action_id" name="action_id" type="text" placeholder="" class="form-control input-md"> </div></div><br><br> <!-- Text input--><div class="form-group col-5"> <label class="col-md-4 control-label" for="action_name" style="margin-top:10px">Point on 100</label> <div class="col-3"> <input id="action_name" name="action_name" min="0" max="100" type="number" placeholder="" class="form-control input-md"> </div></div><br><br></div></div>';
+
+
+                var newInput = $(newIn);
+                var removeBtn = '<button id="remove' + (next - 1) + '" style="margin-left:30px" class="btn btn-danger remove-me" >Remove</button></div></div><div id="field">';
+                var removeButton = $(removeBtn);
+                $(addto).after(newInput);
+                $(addRemove).after(removeButton);
+                $("#field" + next).attr('data-source', $(addto).attr('data-source'));
+                $("#count").val(next);
+
+                $('.remove-me').click(function (e) {
+                    e.preventDefault();
+                    var fieldNum = this.id.charAt(this.id.length - 1);
+                    var fieldID = "#field" + fieldNum;
+                    $(this).remove();
+                    $(fieldID).remove();
+                });
+            });
+
+        });
     </script>
 }

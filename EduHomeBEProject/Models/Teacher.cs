@@ -55,6 +55,12 @@ namespace EduHomeBEProject.Models
         [NotMapped]
         public List<int> HobbyIds { get; set; }
 
+
+
+        //public List<string> Features { get; set; }
+
+
+
         public string Feature1 { get; set; }
         public int FeatureVal1 { get; set; }
         public string Feature2 { get; set; }
