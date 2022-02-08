@@ -1,4 +1,5 @@
 using EduHomeBEProject.DAL;
+using EduHomeBEProject.Hubs;
 using EduHomeBEProject.Models;
 using EduHomeBEProject.Services;
 using Microsoft.AspNetCore.Builder;
@@ -34,6 +35,7 @@ namespace EduHomeBEProject
                 options.UseSqlServer(Configuration.GetConnectionString("Default"));
             });
             services.AddScoped<LayoutServices>();
+            services.AddSignalR();
             services.AddIdentity<AppUser, IdentityRole>(option =>
             {
                 option.SignIn.RequireConfirmedEmail = true;
@@ -77,6 +79,7 @@ namespace EduHomeBEProject
                   name: "areas",
                   pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
                 );
+                endpoints.MapHub<ChatHub>("/chatHub");
             });
 
             app.UseEndpoints(endpoints =>
