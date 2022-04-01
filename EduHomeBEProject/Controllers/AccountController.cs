@@ -189,7 +189,7 @@ namespace EduHomeBEProject.Controllers
                 ModelState.AddModelError("", "Username or Password is wrong");
                 return View();
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Chat", "Home");
         }
 
         public async Task<IActionResult> Logout()

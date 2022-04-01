@@ -1,5 +1,7 @@
 ﻿using EduHomeBEProject.DAL;
+using EduHomeBEProject.Models;
 using EduHomeBEProject.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -14,9 +16,12 @@ namespace EduHomeBEProject.Controllers
     public class HomeController : Controller
     {
         private readonly AppDbContext _context;
-        public HomeController(AppDbContext context)
+        private readonly UserManager<AppUser> _usermanager;
+
+        public HomeController(AppDbContext context,UserManager<AppUser> userManager)
         {
             _context = context;
+            _usermanager = userManager;
         }
 
         public IActionResult Index()
@@ -48,6 +53,11 @@ namespace EduHomeBEProject.Controllers
                 //Teachers=_context.Teachers.Where(c => c.Name.ToLower().Trim().Contains(search.ToLower().Trim())).ToList()
             };
             return View(homeSearchVM);
+        }
+        public IActionResult Chat()
+        {
+            List<AppUser> model = _usermanager.Users.ToList();
+            return View(model);
         }
     }
 }
