@@ -203,7 +203,6 @@
 </div>
 
 @section Scripts{
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js" integrity="sha512-o6XqxgrUsKmchwy9G5VRNWSSxTS4Urr4loO6/0hYdpWmFUfHqGzawGxeQGMDqYzxjY9sbktPbNlkIQJWagVZQg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
@@ -215,8 +214,6 @@
                 var addRemove = "#field" + (next);
                 next = next + 1;
                 var newIn = ' <div id="field' + next + '" name="field' + next + '" style="display:flex"><!-- Text input--><div class="form-group col-6"> <label class="col-md-4 control-label" for="action_id" style="margin-top:10px">Feature</label> <div class="col-12"> <input id="action_id" name="action_id" type="text" placeholder="" class="form-control input-md"> </div></div><br><br> <!-- Text input--><div class="form-group col-5"> <label class="col-md-4 control-label" for="action_name" style="margin-top:10px">Point on 100</label> <div class="col-3"> <input id="action_name" name="action_name" min="0" max="100" type="number" placeholder="" class="form-control input-md"> </div></div><br><br></div></div>';
-
-
                 var newInput = $(newIn);
                 var removeBtn = '<button id="remove' + (next - 1) + '" style="margin-left:30px" class="btn btn-danger remove-me" >Remove</button></div></div><div id="field">';
                 var removeButton = $(removeBtn);
