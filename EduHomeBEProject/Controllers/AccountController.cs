@@ -214,7 +214,7 @@ namespace EduHomeBEProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(UserEditVM editedUser)
         {
-            if (!ModelState.IsValid) return View();
+            if (!ModelState.IsValid) return View(editedUser);
             AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
             UserEditVM eUser = new UserEditVM
             {
@@ -227,18 +227,38 @@ namespace EduHomeBEProject.Controllers
                 ModelState.AddModelError("", $"{editedUser.Username} already existed");
                 return View(eUser);
             }
-            if (string.IsNullOrWhiteSpace(editedUser.CurrentPassword))
+            if (user.Email != editedUser.Email && await _userManager.FindByEmailAsync(editedUser.Email) != null)
+            {
+                ModelState.AddModelError("", $"{editedUser.Email} already taken");
+                return View(eUser);
+            }
+            if (string.IsNullOrWhiteSpace(editedUser.CurrentPassword) && string.IsNullOrEmpty(editedUser.Password) && string.IsNullOrEmpty(editedUser.ComfirmPassword))
             {
                 user.UserName = editedUser.Username;
                 user.Email = editedUser.Email;
                 user.Fullname = editedUser.Fullname;
                 await _userManager.UpdateAsync(user);
+                await _signInManager.SignInAsync(user, true);
             }
             else
             {
+                if (editedUser.CurrentPassword == null || editedUser.Password == null || editedUser.ComfirmPassword == null)
+                {
+                    ModelState.AddModelError("", "Fill Password Requirment");
+                    return View(eUser);
+                }
                 user.UserName = editedUser.Username;
                 user.Email = editedUser.Email;
                 user.Fullname = editedUser.Fullname;
+                IdentityResult resultf = await _userManager.UpdateAsync(user);
+                if (!resultf.Succeeded)
+                {
+                    foreach (IdentityError error in resultf.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                    return View(eUser);
+                }
                 IdentityResult result = await _userManager.ChangePasswordAsync(user, editedUser.CurrentPassword, editedUser.Password);
                 if (!result.Succeeded)
                 {
@@ -248,6 +268,7 @@ namespace EduHomeBEProject.Controllers
                     }
                     return View(eUser);
                 }
+                await _signInManager.SignInAsync(user, true);
             }
             return RedirectToAction("Index", "Home");
         }
